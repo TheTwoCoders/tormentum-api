@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "API for Tormentum app",
   "scripts": {
-    "start": "node build/index.js",
-    "dev": "nodemon src/index.ts",
+    "start": "nodemon src/index.ts",
+    "production": "node build/index.js",
     "build": "tsc --project ./",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "test": "jest"
