@@ -25,9 +25,12 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git
 workflows:
-  test_my_app:
+  test_and_deploy:
     jobs:
       - test
-  heroku_deploy:
-    jobs:
-      - deploy
+      - deploy:
+          filters:
+            branches:
+              only: main
+          requires:
+            - test
