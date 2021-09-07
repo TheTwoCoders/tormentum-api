@@ -4,8 +4,8 @@ import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
+app.get('/', (req, res) => res.send('Welcome to Tormentum API'));
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+  console.log(`⚡️[tormentum-api]: Server is running at http://localhost:${PORT}`);
 });
