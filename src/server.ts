@@ -4,6 +4,7 @@ import healthRoutes from './routes/health'
 
 const app = express()
 
+// Routes
 app.use('/', rootRoutes)
 app.use('/health', healthRoutes)
 
