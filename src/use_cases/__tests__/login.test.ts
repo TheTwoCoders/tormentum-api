@@ -2,6 +2,8 @@ import login from '../login'
 import UserModel from '../../models/UserModel'
 import { encryptPassword } from '../../utils/crypt'
 import { connect, disconnect } from '../../database'
+import UserPasswordIncorrect from '../../exceptions/UserPasswordIncorrect'
+import UserNotFound from '../../exceptions/UserNotFound'
 
 describe('Use Case: Login', () => {
   beforeAll(async () => {
@@ -25,6 +27,30 @@ describe('Use Case: Login', () => {
       const loggedInUser = await login(email, password)
 
       expect(loggedInUser._id).toEqual(user._id)
+    })
+  })
+
+  describe('when passing an invalid password', () => {
+    it('throws UserPasswordIncorrect', async () => {
+      const email = 'john@test2.com'
+      const password = '123456'
+      const wrongPassword = 'abcd'
+      await createUser(email, password)
+
+      await expect(login(email, wrongPassword))
+        .rejects
+        .toThrow(UserPasswordIncorrect)
+    })
+  })
+
+  describe('when passing an invalid email', () => {
+    it('throws UserNotFound', async () => {
+      const nonExistentEmail = 'john@notfound.com'
+      const password = '123456'
+
+      await expect(login(nonExistentEmail, password))
+        .rejects
+        .toThrow(UserNotFound)
     })
   })
 
