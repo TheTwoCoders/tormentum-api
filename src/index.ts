@@ -1,3 +1,11 @@
+import dotenv from 'dotenv'
 import { startServer } from './server'
+import { connect } from './database'
 
-startServer()
+const init = async () => {
+  dotenv.config()
+  startServer()
+  await connect()
+}
+
+init()
