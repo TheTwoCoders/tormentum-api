@@ -26,7 +26,7 @@ describe('Use Case: Register', () => {
         })
     })
     describe('when passing an already registered email', () => {
-        it('throws UserPasswordIncorrect', async () => {
+        it('throws UserDuplicated', async () => {
             const username = 'John'
             const email = 'john2@gmail.com'
             const password = '123456'
