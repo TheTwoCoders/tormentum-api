@@ -1,6 +1,6 @@
 import UserNotFound from '../exceptions/UserNotFound'
 import UserPasswordIncorrect from '../exceptions/UserPasswordIncorrect'
-import UserModel, { User } from '../models/User'
+import UserModel, { User } from '../models/UserModel'
 import { verifyPassword } from '../utils/crypt'
 
 const login = async (
