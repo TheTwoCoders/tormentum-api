@@ -5,6 +5,16 @@ This is the API for Tormentum app.
 
 ## How to Run?
 
+### Initial Setup
+
+To set environment variables and to be able to run the project, you must run first:
+
+```bash
+$ yarn setup
+```
+
+This will run `scripts/setup.sh` script and set `.env` file.
+
 ### Running Tests
 
 You first need Docker and Docker Compose setted up.

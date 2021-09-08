@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API for Tormentum app",
   "scripts": {
+    "setup": "bash scripts/setup.sh",
     "start": "nodemon src/index.ts",
     "production": "node build/index.js",
     "build": "tsc --project ./",
