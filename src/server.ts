@@ -8,7 +8,7 @@ const app = express()
 app.use('/', rootRoutes)
 app.use('/health', healthRoutes)
 
-const startServer = () => {
+const startServer = (): void => {
   const PORT = process.env.PORT || 8080
 
   app.listen(PORT, () => {
