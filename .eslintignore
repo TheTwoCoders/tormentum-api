@@ -2,3 +2,5 @@ node_modules
 dist
 coverage
 build
+babel.config.js
+jest-mongodb-config.js
