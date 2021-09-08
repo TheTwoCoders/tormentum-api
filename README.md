@@ -1,4 +1,5 @@
 # Tormentum API
+[![CircleCI](https://circleci.com/gh/TheTwoCoders/tormentum-api/tree/main.svg?style=svg)](https://circleci.com/gh/TheTwoCoders/tormentum-api/tree/main)
 
 This is the API for Tormentum app.
 
