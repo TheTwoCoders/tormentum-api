@@ -9,7 +9,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "test": "jest"
   },
-  "author": "",
+  "author": "TheTwoCoders",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^10.0.0",
