@@ -13,6 +13,9 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
+          command: yarn setup
+          name: Setup Env
+      - run:
           command: yarn lint
           name: Lint Code
       - run:
