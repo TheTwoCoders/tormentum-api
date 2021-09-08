@@ -2,8 +2,10 @@ import mongoose from 'mongoose'
 
 const connect = async (): Promise<void> => {
   await mongoose.connect(dbUrl())
+}
 
-  console.log(`⚡️[tormentum-api]: Connected to MongoDB`)
+const disconnect = async (): Promise<void> => {
+  await mongoose.disconnect()
 }
 
 const dbUrl = (): string => {
@@ -15,4 +17,4 @@ const dbUrl = (): string => {
   return mongoUrl
 }
 
-export { connect }
+export { connect, disconnect }
