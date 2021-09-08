@@ -10,6 +10,7 @@ const disconnect = async (): Promise<void> => {
 
 const dbUrl = (): string => {
   const mongoUrl = process.env.MONGODB_URL
+
   if (mongoUrl === undefined) {
     throw Error('You need to set MONGODB_URL env variable')
   }

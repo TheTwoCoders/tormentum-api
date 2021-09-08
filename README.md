@@ -17,15 +17,7 @@ This will run `scripts/setup.sh` script and set `.env` file.
 
 ### Running Tests
 
-You first need Docker and Docker Compose setted up.
-
-Before running the tests you need MongoDB running:
-
-```bash
-$ docker compose up -d mongo
-```
-
-Now you can run the tests with:
+Tests use MongoDB memory server. So, it's simple to run, you just need:
 
 ```bash
 $ yarn test
