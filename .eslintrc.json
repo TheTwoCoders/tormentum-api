@@ -9,6 +9,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "semi": [2, "never"]
+    "semi": [2, "never"],
+    "eol-last": ["error", "always"]
   }
 }
