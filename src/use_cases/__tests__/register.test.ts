@@ -11,8 +11,6 @@ describe('Use Case: Register', () => {
         await disconnect()
     })
 
-
-
     describe('when passing a non registered email', () => {
         it('returns the registered user', async () => {
             const username = 'John'
@@ -22,9 +20,10 @@ describe('Use Case: Register', () => {
             await register(username, email, password)
 
             const user = await UserModel.findOne({ email })
-            expect(user).not.toEqual(null)
+            expect(user).not.toBeNull()
         })
     })
+
     describe('when passing an already registered email', () => {
         it('throws UserDuplicated', async () => {
             const username = 'John'
@@ -38,5 +37,4 @@ describe('Use Case: Register', () => {
                 .toThrow(UserDuplicated)
         })
     })
-
 })
