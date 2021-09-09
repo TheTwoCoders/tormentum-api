@@ -6,12 +6,14 @@ import UserPasswordIncorrect from '../../exceptions/UserPasswordIncorrect'
 import UserNotFound from '../../exceptions/UserNotFound'
 
 describe('Use Case: Login', () => {
+  let connection = null
+
   beforeAll(async () => {
-    await connect()
+    connection = await connect(global.__MONGO_DB_NAME__)
   })
 
   afterAll(async () => {
-    await disconnect()
+    await disconnect(connection)
   })
 
   beforeEach(async () => {

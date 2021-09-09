@@ -5,6 +5,14 @@ This is the API for Tormentum app.
 
 ## How to Run?
 
+### Installing Packages
+
+Before running any command you need to install packages using: 
+
+```bash
+$ yarn install
+```
+
 ### Initial Setup
 
 To set environment variables and to be able to run the project, you must run first:
