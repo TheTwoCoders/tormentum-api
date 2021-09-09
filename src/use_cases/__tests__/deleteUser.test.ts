@@ -1,8 +1,7 @@
-import deleteAccount from '../deleteAccount'
+import deleteUser from '../deleteUser'
 import UserModel from '../../models/UserModel'
 import { encryptPassword } from '../../utils/crypt'
 import { connect, disconnect } from '../../database'
-import UserPasswordIncorrect from '../../exceptions/UserPasswordIncorrect'
 import UserNotFound from '../../exceptions/UserNotFound'
 
 describe('Use Case: deleteAccount', () => {
@@ -20,35 +19,21 @@ describe('Use Case: deleteAccount', () => {
         await UserModel.deleteMany({})
     })
 
-    describe('when passing a valid email and password', () => {
+    describe('when passing a valid email', () => {
         it('deletes the account and returns Null', async () => {
             const email = 'johnDeleteTest@gmail.com'
             const password = 'password'
             await createUser(email, password)
 
-            expect(await deleteAccount(email, password)).toEqual("ACCOUNT_DELETED")
-        })
-    })
-
-    describe('when passing an invalid password', () => {
-        it('throws UserPasswordIncorrect', async () => {
-            const email = 'johnDeleteTest@gmail.com'
-            const password = 'password2'
-            const wrongPassword = 'wrongPassword'
-            await createUser(email, password)
-
-            await expect(deleteAccount(email, wrongPassword))
-                .rejects
-                .toThrow(UserPasswordIncorrect)
+            expect(await deleteUser(email)).toBeUndefined()
         })
     })
 
     describe('when passing an invalid email', () => {
         it('throws UserNotFound', async () => {
             const nonExistentEmail = 'notJohnDeleteTest@gmail.com'
-            const password = 'password'
 
-            await expect(deleteAccount(nonExistentEmail, password))
+            await expect(deleteUser(nonExistentEmail))
                 .rejects
                 .toThrow(UserNotFound)
         })
