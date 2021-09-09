@@ -4,11 +4,14 @@ import { connect, disconnect } from '../../database'
 import UserDuplicated from '../../exceptions/UserDuplicated'
 
 describe('Use Case: Register', () => {
+    let connection = null
+
     beforeAll(async () => {
-        await connect()
+        connection = await connect(global.__MONGO_DB_NAME__)
     })
+
     afterAll(async () => {
-        await disconnect()
+        await disconnect(connection)
     })
 
     describe('when passing a non registered email', () => {

@@ -1,21 +1,21 @@
-import mongoose from 'mongoose'
+import mongoose, { Mongoose } from 'mongoose'
 
-const connect = async (): Promise<void> => {
-  await mongoose.connect(dbUrl())
+const connect = async (customDbName = ''): Promise<Mongoose> => {
+  return mongoose.connect(dbUrl(customDbName))
 }
 
-const disconnect = async (): Promise<void> => {
-  await mongoose.disconnect()
+const disconnect = async (connection: Mongoose): Promise<void> => {
+  connection.disconnect()
 }
 
-const dbUrl = (): string => {
+const dbUrl = (customDbName: string): string => {
   const mongoUrl = process.env.MONGODB_URL
 
   if (mongoUrl === undefined) {
     throw Error('You need to set MONGODB_URL env variable')
   }
 
-  return mongoUrl
+  return `${mongoUrl}${customDbName}`
 }
 
 export { connect, disconnect }
