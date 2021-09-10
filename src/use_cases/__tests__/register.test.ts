@@ -1,7 +1,7 @@
 import register from '../register'
-import UserModel from '../../models/UserModel'
 import { connect, disconnect } from '../../database'
 import UserDuplicated from '../../exceptions/UserDuplicated'
+import { findUserByEmail } from '../../repositories/UserRepository'
 
 describe('Use Case: Register', () => {
     let connection = null
@@ -22,7 +22,7 @@ describe('Use Case: Register', () => {
 
             await register(username, email, password)
 
-            const user = await UserModel.findOne({ email })
+            const user = await findUserByEmail(email)
             expect(user).not.toBeNull()
         })
     })
