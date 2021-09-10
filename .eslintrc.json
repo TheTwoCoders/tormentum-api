@@ -16,7 +16,7 @@
     "semi": [2, "never"],
     "eol-last": ["error", "always"],
     "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 1 }],
-    "lines-between-class-members": ["error", "always"],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "padded-blocks": ["error", { "blocks": "never" }],
     "padding-line-between-statements": [
       "error",
