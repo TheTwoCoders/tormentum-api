@@ -27,6 +27,7 @@ describe('Use Case: deleteAccount', () => {
             await createUser(email, password)
             const user = await UserModel.findOne({ email })
             const id = user._id
+
             await deleteAccount(id)
 
             const deletedUser = await UserModel.findOne({ email })
