@@ -4,6 +4,7 @@ import { encryptPassword } from '../../utils/crypt'
 import { connect, disconnect } from '../../database'
 import UserPasswordIncorrect from '../../exceptions/UserPasswordIncorrect'
 import UserNotFound from '../../exceptions/UserNotFound'
+import { createUser } from '../../repositories/UserRepository'
 
 describe('Use Case: Login', () => {
   let connection = null
@@ -24,11 +25,12 @@ describe('Use Case: Login', () => {
     it('returns the logged in user', async () => {
       const email = 'john@test.com'
       const password = '123456'
-      const user = await createUser(email, password)
+      const user = await mockUser(email, password)
 
-      const loggedInUser = await login(email, password)
+      const authentication = await login(email, password)
 
-      expect(loggedInUser._id).toEqual(user._id)
+      expect(authentication.user.id).toEqual(user.id)
+      expect(authentication.token).not.toBeNull()
     })
   })
 
@@ -37,7 +39,7 @@ describe('Use Case: Login', () => {
       const email = 'john@test2.com'
       const password = '123456'
       const wrongPassword = 'abcd'
-      await createUser(email, password)
+      await mockUser(email, password)
 
       await expect(login(email, wrongPassword))
         .rejects
@@ -56,13 +58,7 @@ describe('Use Case: Login', () => {
     })
   })
 
-  const createUser = async (email: string, password: string) => {
-    const user = new UserModel({
-      username: 'John',
-      email,
-      password: encryptPassword(password)
-    })
-
-    return user.save()
+  const mockUser = async (email: string, password: string) => {
+    return createUser('John', email, encryptPassword(password))
   }
 })
