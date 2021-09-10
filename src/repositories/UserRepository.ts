@@ -1,5 +1,6 @@
 import User from "../domain/User"
 import UserModel, { userModelToDomain } from "../models/UserModel"
+import { encryptPassword } from '../utils/crypt'
 
 const createUser = async (
   username: string,
@@ -9,7 +10,7 @@ const createUser = async (
   const user = new UserModel({
       username,
       email,
-      password
+      password: encryptPassword(password)
   })
   const savedUser = await user.save()
 

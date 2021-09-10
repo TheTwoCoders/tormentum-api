@@ -2,7 +2,7 @@ import Authentication from '../domain/Authentication'
 import User from '../domain/User'
 import UserNotFound from '../exceptions/UserNotFound'
 import UserPasswordIncorrect from '../exceptions/UserPasswordIncorrect'
-import UserModel, { userModelToDomain } from '../models/UserModel'
+import { findUserByEmail } from '../repositories/UserRepository'
 import { verifyPassword } from '../utils/crypt'
 
 const login = async (
@@ -18,13 +18,13 @@ const login = async (
 }
 
 const findUser = async (email: string): Promise<User> => {
-  const user = await UserModel.findOne({ email })
+  const user = await findUserByEmail(email)
 
-  if (user == null) {
+  if (user === null) {
     throw new UserNotFound(`User not found for email ${email}`)
   }
 
-  return userModelToDomain(user)
+  return user
 }
 
 export default login

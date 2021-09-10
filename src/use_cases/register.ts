@@ -1,4 +1,3 @@
-import { encryptPassword } from '../utils/crypt'
 import UserDuplicated from '../exceptions/UserDuplicated'
 import { createUser, findUserByEmail } from '../repositories/UserRepository'
 import User from '../domain/User'
@@ -9,7 +8,7 @@ const register = async (username: string, email: string, password: string): Prom
         throw new UserDuplicated(`User duplicated for email ${email}`)
     }
 
-    return createUser(username, email, encryptPassword(password))
+    return createUser(username, email, password)
 }
 
 const isUserExistent = async (email: string): Promise<boolean> => {

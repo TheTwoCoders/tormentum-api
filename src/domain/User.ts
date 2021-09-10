@@ -2,11 +2,8 @@ import { ObjectId } from "mongoose"
 
 class User {
   id: ObjectId;
-
   username: string;
-
   email: string;
-
   password: string;
 
   constructor(id: ObjectId, username: string, email: string, password: string) {

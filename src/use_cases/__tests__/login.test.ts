@@ -1,6 +1,5 @@
 import login from '../login'
 import UserModel from '../../models/UserModel'
-import { encryptPassword } from '../../utils/crypt'
 import { connect, disconnect } from '../../database'
 import UserPasswordIncorrect from '../../exceptions/UserPasswordIncorrect'
 import UserNotFound from '../../exceptions/UserNotFound'
@@ -59,6 +58,6 @@ describe('Use Case: Login', () => {
   })
 
   const mockUser = async (email: string, password: string) => {
-    return createUser('John', email, encryptPassword(password))
+    return createUser('John', email, password)
   }
 })
