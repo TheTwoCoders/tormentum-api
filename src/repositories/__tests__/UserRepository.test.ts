@@ -1,16 +1,17 @@
+import { Types } from 'mongoose'
 import { connect, disconnect } from '../../database'
 import UserModel from '../../models/UserModel'
-import { createUser, deleteAllUsers, findUserByEmail } from '../UserRepository'
+import { createUser, deleteAllUsers, deleteUserById, findUserByEmail, findUserById } from '../UserRepository'
 
 describe('Repositories: UserRepository', () => {
   let connection = null
 
   beforeAll(async () => {
-      connection = await connect(global.__MONGO_DB_NAME__)
+    connection = await connect(global.__MONGO_DB_NAME__)
   })
 
   afterAll(async () => {
-      await disconnect(connection)
+    await disconnect(connection)
   })
 
   beforeEach(() => {
@@ -58,6 +59,37 @@ describe('Repositories: UserRepository', () => {
 
         expect(foundUser).toBeNull()
       })
+    })
+  })
+
+  describe('when finding user by Id', () => {
+    describe('and the user exist', () => {
+      it('returns the user found', async () => {
+        const user = await createUser('test', 'findingById@test.com', 'test1')
+
+        const foundUser = await findUserById(user.id)
+
+        expect(foundUser.id).toEqual(user.id)
+      })
+    })
+
+    describe('and the user does not exist', () => {
+      it('returns null', async () => {
+        const foundUser = await findUserById(new Types.ObjectId())
+
+        expect(foundUser).toBeNull()
+      })
+    })
+  })
+
+  describe('when deleting one user by Id', () => {
+    it('the user cannot be found on database', async () => {
+      const user = await createUser('test1', 'test1@test.com', 'test1')
+
+      await deleteUserById(user.id)
+
+      const foundUser = await UserModel.findById(user.id)
+      expect(foundUser).toBeNull()
     })
   })
 })
