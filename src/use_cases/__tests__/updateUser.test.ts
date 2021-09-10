@@ -1,11 +1,11 @@
-import deleteUser from '../deleteUser'
+import updateUser from '../updateUser'
 import UserModel from '../../models/UserModel'
 import { Types } from "mongoose"
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
-import { createUser, findUserById } from '../../repositories/UserRepository'
+import { createUser } from '../../repositories/UserRepository'
 
-describe('Use Case: deleteAccount', () => {
+describe('Use Case: updateUser', () => {
   let connection = null
 
   beforeAll(async () => {
@@ -21,19 +21,20 @@ describe('Use Case: deleteAccount', () => {
   })
 
   describe('when passing a valid Id', () => {
-    it('deletes the user and returns Null', async () => {
+    it('updates the user and returns updatedUser', async () => {
       const user = await mockUser()
+      const content = { email: 'updatedEmail' }
 
-      await deleteUser(user.id)
-
-      const deletedUser = await findUserById(user.id)
-      expect(deletedUser).toBeNull()
+      const updatedUser = await updateUser(user.id, content)
+      await expect(updatedUser.email).not.toEqual(user.email)
     })
   })
 
   describe('when passing a invalid Id', () => {
     it('throws UserNotFound', async () => {
-      await expect(deleteUser(new Types.ObjectId())).rejects.toThrow(UserNotFound)
+      const content = { email: 'updatedEmail' }
+
+      await expect(updateUser(new Types.ObjectId(), content)).rejects.toThrow(UserNotFound)
     })
   })
 

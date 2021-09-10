@@ -1,7 +1,7 @@
 import { Types } from 'mongoose'
 import { connect, disconnect } from '../../database'
 import UserModel from '../../models/UserModel'
-import { createUser, deleteAllUsers, deleteUserById, findUserByEmail, findUserById } from '../UserRepository'
+import { createUser, deleteAllUsers, deleteUserById, findUserByEmail, findUserById, updateUserById } from '../UserRepository'
 
 describe('Repositories: UserRepository', () => {
   let connection = null
@@ -90,6 +90,17 @@ describe('Repositories: UserRepository', () => {
 
       const foundUser = await UserModel.findById(user.id)
       expect(foundUser).toBeNull()
+    })
+  })
+
+  describe('when updating one user by Id', () => {
+    it('modifies user data', async () => {
+      const user = await createUser('test', 'test2@test.com', 'test1')
+      const content = { email: 'updatedEmail' }
+      await updateUserById(user.id, content)
+
+      const foundUser = await findUserByEmail('updatedEmail')
+      expect(foundUser).not.toBeNull()
     })
   })
 })
