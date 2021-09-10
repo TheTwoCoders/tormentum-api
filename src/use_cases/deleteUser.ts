@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose'
 import UserNotFound from '../exceptions/UserNotFound'
-import UserModel, { User } from '../models/UserModel'
+import UserModel from '../models/UserModel'
 
 const deleteAccount = async (_id: ObjectId): Promise<void> => {
     const user = await UserModel.findOne({ _id })
