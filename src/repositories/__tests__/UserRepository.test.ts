@@ -89,7 +89,6 @@ describe('Repositories: UserRepository', () => {
       await deleteUserById(user.id)
 
       const foundUser = await UserModel.findById(user.id)
-
       expect(foundUser).toBeNull()
     })
   })

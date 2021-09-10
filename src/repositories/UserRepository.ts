@@ -29,6 +29,7 @@ const findUserByEmail = async (email: string): Promise<User | null> => {
 
   return userModelToDomain(user)
 }
+
 const findUserById = async (id: ObjectId): Promise<User | null> => {
   const user = await UserModel.findById(id)
 
@@ -36,6 +37,7 @@ const findUserById = async (id: ObjectId): Promise<User | null> => {
 
   return userModelToDomain(user)
 }
+
 const deleteUserById = async (id: ObjectId): Promise<void> => {
   await UserModel.deleteOne({ _id: id })
 }

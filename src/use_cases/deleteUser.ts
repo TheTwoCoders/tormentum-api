@@ -1,7 +1,6 @@
 import { ObjectId } from 'mongoose'
 import UserNotFound from '../exceptions/UserNotFound'
 import { deleteUserById } from '../repositories/UserRepository'
-
 import { findUserById } from '../repositories/UserRepository'
 
 const deleteUser = async (id: ObjectId): Promise<void> => {
