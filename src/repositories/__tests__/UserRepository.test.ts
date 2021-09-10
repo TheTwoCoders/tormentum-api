@@ -1,7 +1,7 @@
 import { Types } from 'mongoose'
 import { connect, disconnect } from '../../database'
 import UserModel from '../../models/UserModel'
-import { createUser, deleteAllUsers, findUserByEmail, findUserById } from '../UserRepository'
+import { createUser, deleteAllUsers, deleteUserById, findUserByEmail, findUserById } from '../UserRepository'
 
 describe('Repositories: UserRepository', () => {
   let connection = null
@@ -79,6 +79,18 @@ describe('Repositories: UserRepository', () => {
 
         expect(foundUser).toBeNull()
       })
+    })
+  })
+
+  describe('when deleting one user by Id', () => {
+    it('the user cannot be found on database', async () => {
+      const user = await createUser('test1', 'test1@test.com', 'test1')
+
+      await deleteUserById(user.id)
+
+      const foundUser = await UserModel.findById(user.id)
+
+      expect(foundUser).toBeNull()
     })
   })
 })

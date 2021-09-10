@@ -36,5 +36,8 @@ const findUserById = async (id: ObjectId): Promise<User | null> => {
 
   return userModelToDomain(user)
 }
+const deleteUserById = async (id: ObjectId): Promise<void> => {
+  await UserModel.deleteOne({ _id: id })
+}
 
-export { createUser, deleteAllUsers, findUserByEmail, findUserById }
+export { createUser, deleteAllUsers, findUserByEmail, findUserById, deleteUserById }
