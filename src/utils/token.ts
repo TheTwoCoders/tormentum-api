@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken'
 
 const generateJwtToken = (obj: Record<string, unknown>): string =>
   jwt.sign(obj, tokenSecretKey())

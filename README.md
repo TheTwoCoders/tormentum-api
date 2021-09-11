@@ -30,3 +30,17 @@ Tests use MongoDB memory server. So, it's simple to run, you just need:
 ```bash
 $ yarn test
 ```
+
+### Running API Locally
+
+To run the API locally, you have first to start MongoDB through Docker:
+
+```bash
+$ docker compose up -d mongo
+```
+
+Then, you can start the app:
+
+```bash
+$ yarn start
+```

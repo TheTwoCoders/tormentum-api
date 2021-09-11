@@ -1,12 +1,26 @@
 import express from 'express'
 import rootRoutes from './routes/root'
 import healthRoutes from './routes/health'
+import usersRoutes from './routes/users'
+import { handleError } from './server/error'
 
 const app = express()
+
+app.use(express.json())
 
 // Routes
 app.use('/', rootRoutes)
 app.use('/health', healthRoutes)
+app.use('/users', usersRoutes)
+
+app.use((
+  error: Error,
+  _req: express.Request,
+  res: express.Response,
+  _next: express.NextFunction
+) => {
+  handleError(res, error)
+})
 
 const startServer = (): void => {
   const PORT = process.env.PORT || 8080
@@ -16,4 +30,4 @@ const startServer = (): void => {
   })
 }
 
-export { startServer }
+export { startServer, app }

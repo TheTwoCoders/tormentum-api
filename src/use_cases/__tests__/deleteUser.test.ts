@@ -1,6 +1,6 @@
 import deleteUser from '../deleteUser'
 import UserModel from '../../models/UserModel'
-import { Types } from "mongoose"
+import { Types } from 'mongoose'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
 import { createUser, findUserById } from '../../repositories/UserRepository'
@@ -38,7 +38,7 @@ describe('Use Case: deleteAccount', () => {
   })
 
   const mockUser = async () => {
-    return createUser('John', "johnTest@gmail.com", "password")
+    return createUser('John', 'johnTest@gmail.com', 'password')
   }
 })
 
