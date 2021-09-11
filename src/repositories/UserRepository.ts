@@ -1,6 +1,5 @@
-import { ObjectId } from "mongoose"
-import User from "../domain/User"
-import UserModel, { userModelToDomain } from "../models/UserModel"
+import User from '../domain/User'
+import UserModel, { userModelToDomain } from '../models/UserModel'
 import { encryptPassword } from '../utils/crypt'
 
 const createUser = async (
@@ -30,7 +29,7 @@ const findUserByEmail = async (email: string): Promise<User | null> => {
   return userModelToDomain(user)
 }
 
-const findUserById = async (id: ObjectId): Promise<User | null> => {
+const findUserById = async (id: string): Promise<User | null> => {
   const user = await UserModel.findById(id)
 
   if (user === null) return null
@@ -38,8 +37,8 @@ const findUserById = async (id: ObjectId): Promise<User | null> => {
   return userModelToDomain(user)
 }
 
-const deleteUserById = async (id: ObjectId): Promise<void> => {
-  await UserModel.deleteOne({ _id: id })
+const deleteUserById = async (id: string): Promise<void> => {
+  await UserModel.findByIdAndDelete(id)
 }
 
 export { createUser, deleteAllUsers, findUserByEmail, findUserById, deleteUserById }

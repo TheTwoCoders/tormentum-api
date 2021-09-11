@@ -1,4 +1,3 @@
-import { Types } from 'mongoose'
 import { connect, disconnect } from '../../database'
 import UserModel from '../../models/UserModel'
 import { createUser, deleteAllUsers, deleteUserById, findUserByEmail, findUserById } from '../UserRepository'
@@ -75,7 +74,7 @@ describe('Repositories: UserRepository', () => {
 
     describe('and the user does not exist', () => {
       it('returns null', async () => {
-        const foundUser = await findUserById(new Types.ObjectId())
+        const foundUser = await findUserById('613c1a013e0b4ef57aaaa3c9')
 
         expect(foundUser).toBeNull()
       })

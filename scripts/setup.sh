@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp .env.template .env
+cp .env.template ".env"
