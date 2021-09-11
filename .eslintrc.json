@@ -25,6 +25,8 @@
     "jest/consistent-test-it": ["error", {"fn": "it"}],
     "jest-formatting/padding-around-describe-blocks": 2,
     "jest-formatting/padding-around-test-blocks": 2,
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
   }
 }
