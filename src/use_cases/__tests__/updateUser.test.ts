@@ -1,5 +1,4 @@
 import updateUser from '../updateUser'
-import UserModel from '../../models/UserModel'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
 import { createUser, deleteAllUsers } from '../../repositories/UserRepository'

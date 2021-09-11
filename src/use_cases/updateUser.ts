@@ -1,5 +1,5 @@
 import UserNotFound from '../exceptions/UserNotFound'
-import { findUserById, updateUserById } from '../repositories/UserRepository'
+import { updateUserById } from '../repositories/UserRepository'
 import User from '../domain/User'
 
 const updateUser = async (
@@ -10,13 +10,12 @@ const updateUser = async (
     password?: string
   }
 ): Promise<User | null> => {
-  const user = await findUserById(id)
-  if (user == null) {
+  const updatedUser = await updateUserById(id, content)
+
+  if (updatedUser == null) {
     throw new UserNotFound(`User not found for Id ${id}`)
   }
 
-  await updateUserById(id, content)
-  const updatedUser = findUserById(id)
   return updatedUser
 }
 

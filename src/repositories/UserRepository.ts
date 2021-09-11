@@ -50,8 +50,10 @@ const updateUserById = async (
   }
 ): Promise<User | null> => {
   const updatedUser = await UserModel.findByIdAndUpdate(id, content)
+
   if (updatedUser == null) return null
-  return userModelToDomain(updatedUser)
+
+  return findUserById(id)
 }
 
 export { createUser, deleteAllUsers, findUserByEmail, findUserById, deleteUserById, updateUserById }
