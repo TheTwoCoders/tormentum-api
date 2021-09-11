@@ -17,7 +17,7 @@ const schema = new Schema<UserDbInterface>({
 const UserModel = model<UserDbInterface>('User', schema)
 
 const userModelToDomain = (userDb: UserDbInterface): User => {
-  return new User(userDb._id, userDb.username, userDb.email, userDb.password)
+  return new User(userDb._id.toString(), userDb.username, userDb.email, userDb.password)
 }
 
 export { userModelToDomain }
