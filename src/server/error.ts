@@ -1,4 +1,5 @@
 import express from 'express'
+import ConflictException from '../exceptions/ConflictException'
 import ValidationException from '../exceptions/ValidationException'
 import ErrorResponse from "../resources/ErrorResponse"
 import ValidationErrorResponse from '../resources/ValidationErrorResponse'
@@ -29,6 +30,8 @@ const respondUnknownError = (
 const handleError = (res: express.Response, e: Error): void => {
   if (e instanceof ValidationException) {
     return respondValidationError(res, e.response)
+  } else if (e instanceof ConflictException) {
+    return respondError(res, 409, new ErrorResponse(e.message))
   }
 
   return respondUnknownError(res, e.message)
