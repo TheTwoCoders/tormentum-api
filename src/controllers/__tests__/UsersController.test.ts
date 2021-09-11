@@ -1,4 +1,3 @@
-import { Types } from 'mongoose'
 import { mocked } from 'ts-jest/utils'
 import User from '../../domain/User'
 import CreateUserRequest from '../../resources/CreateUserRequest'
@@ -18,7 +17,7 @@ describe('Controllers: Users Controller', () => {
         password: '123456'
       })
       const user = new User(
-        new Types.ObjectId(),
+        '613c1a2a7c3c65de8fa77384',
         request.username,
         request.email,
         request.password
