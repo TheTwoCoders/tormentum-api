@@ -1,9 +1,9 @@
-import deleteUser from '../deleteUser'
+import updateUser from '../updateUser'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
-import { createUser, deleteAllUsers, findUserById } from '../../repositories/UserRepository'
+import { createUser, deleteAllUsers } from '../../repositories/UserRepository'
 
-describe('Use Case: deleteAccount', () => {
+describe('Use Case: updateUser', () => {
   let connection = null
 
   beforeAll(async () => {
@@ -19,19 +19,21 @@ describe('Use Case: deleteAccount', () => {
   })
 
   describe('when passing a valid Id', () => {
-    it('deletes the user and returns Null', async () => {
+    it('updates the user and returns updatedUser', async () => {
       const user = await mockUser()
+      const content = { email: 'updatedEmail' }
 
-      await deleteUser(user.id)
-
-      const deletedUser = await findUserById(user.id)
-      expect(deletedUser).toBeNull()
+      const updatedUser = await updateUser(user.id, content)
+      console.log(updatedUser)
+      await expect(updatedUser.email).not.toEqual(user.email)
     })
   })
 
   describe('when passing a invalid Id', () => {
     it('throws UserNotFound', async () => {
-      await expect(deleteUser('613c27a391f7b2af947b3c33')).rejects.toThrow(UserNotFound)
+      const content = { email: 'updatedEmail' }
+
+      await expect(updateUser('613c27a391f7b2af947b3c33', content)).rejects.toThrow(UserNotFound)
     })
   })
 

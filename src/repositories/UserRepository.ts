@@ -41,4 +41,19 @@ const deleteUserById = async (id: string): Promise<void> => {
   await UserModel.findByIdAndDelete(id)
 }
 
-export { createUser, deleteAllUsers, findUserByEmail, findUserById, deleteUserById }
+const updateUserById = async (
+  id: string,
+  content: {
+    username?: string,
+    email?: string,
+    password?: string
+  }
+): Promise<User | null> => {
+  const updatedUser = await UserModel.findByIdAndUpdate(id, content)
+
+  if (updatedUser == null) return null
+
+  return findUserById(id)
+}
+
+export { createUser, deleteAllUsers, findUserByEmail, findUserById, deleteUserById, updateUserById }
