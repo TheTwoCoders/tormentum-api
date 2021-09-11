@@ -2,7 +2,6 @@ import { Types } from 'mongoose'
 import { mocked } from 'ts-jest/utils'
 import User from '../../domain/User'
 import CreateUserRequest from '../../resources/CreateUserRequest'
-import CreateUserResponse from '../../resources/CreateUserResponse'
 import register from '../../use_cases/register'
 import { registerController } from '../UsersController'
 
