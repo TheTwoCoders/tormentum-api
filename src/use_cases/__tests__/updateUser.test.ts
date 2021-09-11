@@ -1,6 +1,5 @@
 import updateUser from '../updateUser'
 import UserModel from '../../models/UserModel'
-import { Types } from "mongoose"
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
 import { createUser } from '../../repositories/UserRepository'
@@ -34,12 +33,12 @@ describe('Use Case: updateUser', () => {
     it('throws UserNotFound', async () => {
       const content = { email: 'updatedEmail' }
 
-      await expect(updateUser(new Types.ObjectId(), content)).rejects.toThrow(UserNotFound)
+      await expect(updateUser('613c27a391f7b2af947b3c33', content)).rejects.toThrow(UserNotFound)
     })
   })
 
   const mockUser = async () => {
-    return createUser('John', "johnTest@gmail.com", "password")
+    return createUser('John', 'johnTest@gmail.com', 'password')
   }
 })
 

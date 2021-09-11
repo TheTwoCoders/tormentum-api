@@ -1,6 +1,5 @@
 import deleteUser from '../deleteUser'
 import UserModel from '../../models/UserModel'
-import { Types } from 'mongoose'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
 import { createUser, findUserById } from '../../repositories/UserRepository'
@@ -33,7 +32,7 @@ describe('Use Case: deleteAccount', () => {
 
   describe('when passing a invalid Id', () => {
     it('throws UserNotFound', async () => {
-      await expect(deleteUser(new Types.ObjectId())).rejects.toThrow(UserNotFound)
+      await expect(deleteUser('613c27a391f7b2af947b3c33')).rejects.toThrow(UserNotFound)
     })
   })
 
