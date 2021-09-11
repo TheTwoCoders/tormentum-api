@@ -1,5 +1,5 @@
-import { ValidationError } from "class-validator"
-import ErrorResponse, { ErrorDetail } from "./ErrorResponse"
+import { ValidationError } from 'class-validator'
+import ErrorResponse, { ErrorDetail } from './ErrorResponse'
 
 class ValidationErrorResponse extends ErrorResponse {
   constructor(errors: ValidationError[]) {

@@ -1,4 +1,4 @@
-import { IsEmail, MaxLength, MinLength } from "class-validator"
+import { IsEmail, MaxLength, MinLength } from 'class-validator'
 
 class CreateUserRequest {
   @MinLength(3)

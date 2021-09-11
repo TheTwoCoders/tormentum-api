@@ -1,7 +1,7 @@
-import ConflictException from "../exceptions/ConflictException"
-import UserDuplicated from "../exceptions/UserDuplicated"
-import CreateUserRequest from "../resources/CreateUserRequest"
-import CreateUserResponse from "../resources/CreateUserResponse"
+import ConflictException from '../exceptions/ConflictException'
+import UserDuplicated from '../exceptions/UserDuplicated'
+import CreateUserRequest from '../resources/CreateUserRequest'
+import CreateUserResponse from '../resources/CreateUserResponse'
 import register from '../use_cases/register'
 
 const registerController = async (

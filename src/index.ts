@@ -6,7 +6,7 @@ const init = async () => {
   dotenv.config()
   startServer()
   await connect()
-  console.log(`⚡️[tormentum-api]: Connected to MongoDB`)
+  console.log('⚡️[tormentum-api]: Connected to MongoDB')
 }
 
 init()

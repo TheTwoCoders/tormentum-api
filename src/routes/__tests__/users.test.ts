@@ -8,11 +8,14 @@ describe('Routes: Users', () => {
 
   beforeAll(async () => {
     connection = await connect(global.__MONGO_DB_NAME__)
-    deleteAllUsers()
   })
 
   afterAll(async () => {
     await disconnect(connection)
+  })
+
+  beforeEach(() => {
+    deleteAllUsers()
   })
 
   describe('when calling POST /users/register', () => {
@@ -49,6 +52,28 @@ describe('Routes: Users', () => {
         
         expect(response.body.message).toEqual(`User duplicated for email ${user.email}`)
         expect(response.body.details).toEqual([])
+      })
+    })
+
+    describe('and passing an invalid email', () => {
+      it('returns status 400 with validation error', async () => {
+        const invalidEmail = 'abc123'
+        const response = await request(app)
+          .post('/users/register')
+          .send({
+            username: 'test',
+            email: invalidEmail,
+            password: '123456'
+          })
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(400)
+        
+        expect(response.body.message).toEqual('Validation error')
+        expect(response.body.details).toEqual([{
+          property: 'email',
+          message: '{"isEmail":"email must be an email"}'
+        }])
       })
     })
   })

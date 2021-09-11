@@ -1,5 +1,5 @@
-import User from "../domain/User"
-import UserModel, { userModelToDomain } from "../models/UserModel"
+import User from '../domain/User'
+import UserModel, { userModelToDomain } from '../models/UserModel'
 import { encryptPassword } from '../utils/crypt'
 
 const createUser = async (

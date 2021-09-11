@@ -1,4 +1,4 @@
-import User from "../domain/User"
+import User from '../domain/User'
 
 class CreateUserResponse {
   id: string;

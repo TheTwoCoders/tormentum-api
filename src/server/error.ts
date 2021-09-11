@@ -1,7 +1,7 @@
 import express from 'express'
 import ConflictException from '../exceptions/ConflictException'
 import ValidationException from '../exceptions/ValidationException'
-import ErrorResponse from "../resources/ErrorResponse"
+import ErrorResponse from '../resources/ErrorResponse'
 import ValidationErrorResponse from '../resources/ValidationErrorResponse'
 
 const respondError = (

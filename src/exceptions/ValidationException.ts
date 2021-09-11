@@ -1,4 +1,4 @@
-import ValidationErrorResponse from "../resources/ValidationErrorResponse"
+import ValidationErrorResponse from '../resources/ValidationErrorResponse'
 
 class ValidationException extends Error {
   response: ValidationErrorResponse;
