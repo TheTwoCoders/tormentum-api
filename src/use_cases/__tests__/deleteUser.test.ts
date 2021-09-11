@@ -1,8 +1,7 @@
 import deleteUser from '../deleteUser'
-import UserModel from '../../models/UserModel'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
-import { createUser, findUserById } from '../../repositories/UserRepository'
+import { createUser, deleteAllUsers, findUserById } from '../../repositories/UserRepository'
 
 describe('Use Case: deleteAccount', () => {
   let connection = null
@@ -16,7 +15,7 @@ describe('Use Case: deleteAccount', () => {
   })
 
   beforeEach(async () => {
-    await UserModel.deleteMany({})
+    await deleteAllUsers()
   })
 
   describe('when passing a valid Id', () => {

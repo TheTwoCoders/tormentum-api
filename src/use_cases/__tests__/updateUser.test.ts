@@ -2,7 +2,7 @@ import updateUser from '../updateUser'
 import UserModel from '../../models/UserModel'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
-import { createUser } from '../../repositories/UserRepository'
+import { createUser, deleteAllUsers } from '../../repositories/UserRepository'
 
 describe('Use Case: updateUser', () => {
   let connection = null
@@ -16,7 +16,7 @@ describe('Use Case: updateUser', () => {
   })
 
   beforeEach(async () => {
-    await UserModel.deleteMany({})
+    await deleteAllUsers()
   })
 
   describe('when passing a valid Id', () => {
@@ -25,6 +25,7 @@ describe('Use Case: updateUser', () => {
       const content = { email: 'updatedEmail' }
 
       const updatedUser = await updateUser(user.id, content)
+      console.log(updatedUser)
       await expect(updatedUser.email).not.toEqual(user.email)
     })
   })

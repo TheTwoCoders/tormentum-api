@@ -13,8 +13,8 @@ describe('Repositories: UserRepository', () => {
     await disconnect(connection)
   })
 
-  beforeEach(() => {
-    UserModel.deleteMany({})
+  beforeEach(async () => {
+    await deleteAllUsers()
   })
 
   describe('when creating an user', () => {
@@ -96,6 +96,7 @@ describe('Repositories: UserRepository', () => {
     it('modifies user data', async () => {
       const user = await createUser('test', 'test2@test.com', 'test1')
       const content = { email: 'updatedEmail' }
+
       await updateUserById(user.id, content)
 
       const foundUser = await findUserByEmail('updatedEmail')
