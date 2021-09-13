@@ -1,10 +1,11 @@
+import { Mongoose } from 'mongoose'
 import register from '../register'
 import { connect, disconnect } from '../../database'
 import UserDuplicated from '../../exceptions/UserDuplicated'
 import { findUserByEmail } from '../../repositories/UserRepository'
 
 describe('Use Case: Register', () => {
-  let connection = null
+  let connection: Mongoose | null = null
 
   beforeAll(async () => {
     connection = await connect(global.__MONGO_DB_NAME__)

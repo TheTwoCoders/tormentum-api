@@ -1,3 +1,4 @@
+import { Mongoose } from 'mongoose'
 import login from '../login'
 import UserModel from '../../models/UserModel'
 import { connect, disconnect } from '../../database'
@@ -6,7 +7,7 @@ import UserNotFound from '../../exceptions/UserNotFound'
 import { createUser } from '../../repositories/UserRepository'
 
 describe('Use Case: Login', () => {
-  let connection = null
+  let connection: Mongoose | null = null
 
   beforeAll(async () => {
     connection = await connect(global.__MONGO_DB_NAME__)

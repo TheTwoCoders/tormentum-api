@@ -2,9 +2,10 @@ import deleteUser from '../deleteUser'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
 import { createUser, deleteAllUsers, findUserById } from '../../repositories/UserRepository'
+import { Mongoose } from 'mongoose'
 
 describe('Use Case: deleteAccount', () => {
-  let connection = null
+  let connection: Mongoose | null = null
 
   beforeAll(async () => {
     connection = await connect(global.__MONGO_DB_NAME__)

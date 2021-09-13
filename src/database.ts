@@ -4,7 +4,8 @@ const connect = async (customDbName = ''): Promise<Mongoose> => {
   return mongoose.connect(dbUrl(customDbName))
 }
 
-const disconnect = async (connection: Mongoose): Promise<void> => {
+const disconnect = async (connection: Mongoose | null): Promise<void> => {
+  if (connection === null) return
   connection.disconnect()
 }
 

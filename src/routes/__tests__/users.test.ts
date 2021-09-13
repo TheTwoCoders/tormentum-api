@@ -1,10 +1,11 @@
+import { Mongoose } from 'mongoose'
 import request from 'supertest'
 import { connect, disconnect } from '../../database'
 import { createUser, deleteAllUsers } from '../../repositories/UserRepository'
 import { app } from '../../server'
 
 describe('Routes: Users', () => {
-  let connection = null
+  let connection: Mongoose | null = null
 
   beforeAll(async () => {
     connection = await connect(global.__MONGO_DB_NAME__)

@@ -1,9 +1,10 @@
+import { Mongoose } from 'mongoose'
 import { connect, disconnect } from '../../database'
 import UserModel from '../../models/UserModel'
 import { createUser, deleteAllUsers, deleteUserById, findUserByEmail, findUserById, updateUserById } from '../UserRepository'
 
 describe('Repositories: UserRepository', () => {
-  let connection = null
+  let connection: Mongoose | null = null
 
   beforeAll(async () => {
     connection = await connect(global.__MONGO_DB_NAME__)
@@ -48,7 +49,7 @@ describe('Repositories: UserRepository', () => {
 
         const foundUser = await findUserByEmail(user.email)
 
-        expect(foundUser.id).toEqual(user.id)
+        expect(foundUser?.id).toEqual(user.id)
       })
     })
 
@@ -68,7 +69,7 @@ describe('Repositories: UserRepository', () => {
 
         const foundUser = await findUserById(user.id)
 
-        expect(foundUser.id).toEqual(user.id)
+        expect(foundUser?.id).toEqual(user.id)
       })
     })
 

@@ -2,9 +2,10 @@ import updateUser from '../updateUser'
 import { connect, disconnect } from '../../database'
 import UserNotFound from '../../exceptions/UserNotFound'
 import { createUser, deleteAllUsers } from '../../repositories/UserRepository'
+import { Mongoose } from 'mongoose'
 
 describe('Use Case: updateUser', () => {
-  let connection = null
+  let connection: Mongoose | null = null
 
   beforeAll(async () => {
     connection = await connect(global.__MONGO_DB_NAME__)
@@ -24,8 +25,7 @@ describe('Use Case: updateUser', () => {
       const content = { email: 'updatedEmail' }
 
       const updatedUser = await updateUser(user.id, content)
-      console.log(updatedUser)
-      await expect(updatedUser.email).not.toEqual(user.email)
+      await expect(updatedUser?.email).not.toEqual(user.email)
     })
   })
 
