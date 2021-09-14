@@ -3,6 +3,16 @@
 
 This is the API for Tormentum app.
 
+## API Architecture
+
+<img src="docs/images/layers-architecture.png" width=450>
+
+The API has a 3 layer architecture:
+
+- Application Layer: Has the files that controls the application. Routes, Controllers and I/O objects come here.
+- Domain Layer: Where are all the business rules. Here are the Use Cases, Entities and Repositories.
+- Infra Layer: Connection with external services. Database, External APIs and Server configs come here.
+
 ## How to Run?
 
 ### Installing Packages

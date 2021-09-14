@@ -1,7 +1,17 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/**/*.test.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@application/*": ["application/*"],
+      "@domain/*": ["domain/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@infra/*": ["infra/*"],
+      "@server/*": ["server/*"],
+      "@utils/*": ["utils/*"],
+    },
+    "noImplicitAny": false,
     "target": "es6",
     "module": "commonjs",
     "outDir": "./build",
