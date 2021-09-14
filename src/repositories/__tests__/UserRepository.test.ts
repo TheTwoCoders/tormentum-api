@@ -1,7 +1,14 @@
 import { Mongoose } from 'mongoose'
-import { connect, disconnect } from '../../database'
-import UserModel from '../../models/UserModel'
-import { createUser, deleteAllUsers, deleteUserById, findUserByEmail, findUserById, updateUserById } from '../UserRepository'
+import { connect, disconnect } from '@database/database'
+import UserModel from '@database/models/UserModel'
+import {
+  createUser,
+  deleteAllUsers,
+  deleteUserById,
+  findUserByEmail,
+  findUserById,
+  updateUserById
+} from '@repositories/UserRepository'
 
 describe('Repositories: UserRepository', () => {
   let connection: Mongoose | null = null

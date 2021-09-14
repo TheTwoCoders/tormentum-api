@@ -1,6 +1,6 @@
-import UserDuplicated from '../exceptions/UserDuplicated'
-import { createUser, findUserByEmail } from '../repositories/UserRepository'
-import User from '../domain/User'
+import UserDuplicated from '@exceptions/UserDuplicated'
+import { createUser, findUserByEmail } from '@repositories/UserRepository'
+import User from '@domain/User'
 
 const register = async (username: string, email: string, password: string): Promise<User> => {
   const userExistent = await isUserExistent(email)

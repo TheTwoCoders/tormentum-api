@@ -1,10 +1,10 @@
 import { Mongoose } from 'mongoose'
-import login from '../login'
-import UserModel from '../../models/UserModel'
-import { connect, disconnect } from '../../database'
-import UserPasswordIncorrect from '../../exceptions/UserPasswordIncorrect'
-import UserNotFound from '../../exceptions/UserNotFound'
-import { createUser } from '../../repositories/UserRepository'
+import login from '@use_cases/login'
+import UserModel from '@database/models/UserModel'
+import { connect, disconnect } from '@database/database'
+import UserPasswordIncorrect from '@exceptions/UserPasswordIncorrect'
+import UserNotFound from '@exceptions/UserNotFound'
+import { createUser } from '@repositories/UserRepository'
 
 describe('Use Case: Login', () => {
   let connection: Mongoose | null = null

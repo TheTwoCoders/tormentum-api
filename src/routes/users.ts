@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { registerController } from '../controllers/UsersController'
-import CreateUserRequest from '../resources/CreateUserRequest'
-import { validateRequest } from '../server/validate'
+import { registerController } from '@controllers/UsersController'
+import CreateUserRequest from '@resources/CreateUserRequest'
+import { validateRequest } from '@server/validate'
 
 const router = Router()
 

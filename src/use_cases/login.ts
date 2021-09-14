@@ -1,9 +1,9 @@
-import Authentication from '../domain/Authentication'
-import User from '../domain/User'
-import UserNotFound from '../exceptions/UserNotFound'
-import UserPasswordIncorrect from '../exceptions/UserPasswordIncorrect'
-import { findUserByEmail } from '../repositories/UserRepository'
-import { verifyPassword } from '../utils/crypt'
+import Authentication from '@domain/Authentication'
+import User from '@domain/User'
+import UserNotFound from '@exceptions/UserNotFound'
+import UserPasswordIncorrect from '@exceptions/UserPasswordIncorrect'
+import { findUserByEmail } from '@repositories/UserRepository'
+import { verifyPassword } from '@utils/crypt'
 
 const login = async (
   email: string,

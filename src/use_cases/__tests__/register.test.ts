@@ -1,8 +1,8 @@
 import { Mongoose } from 'mongoose'
-import register from '../register'
-import { connect, disconnect } from '../../database'
-import UserDuplicated from '../../exceptions/UserDuplicated'
-import { findUserByEmail } from '../../repositories/UserRepository'
+import register from '@use_cases/register'
+import { connect, disconnect } from '@database/database'
+import UserDuplicated from '@exceptions/UserDuplicated'
+import { findUserByEmail } from '@repositories/UserRepository'
 
 describe('Use Case: Register', () => {
   let connection: Mongoose | null = null

@@ -1,5 +1,5 @@
 import { Schema, model, ObjectId } from 'mongoose'
-import User from '../domain/User'
+import User from '@domain/User'
 
 interface UserDbInterface {
   _id: ObjectId;

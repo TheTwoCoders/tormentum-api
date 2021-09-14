@@ -3,6 +3,18 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "./src",
+    "paths": {
+      "@controllers/*": ["controllers/*"],
+      "@domain/*": ["domain/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@routes/*": ["routes/*"],
+      "@database/*": ["database/*"],
+      "@repositories/*": ["repositories/*"],
+      "@server/*": ["server/*"],
+      "@utils/*": ["utils/*"],
+      "@resources/*": ["resources/*"],
+      "@use_cases/*": ["use_cases/*"],
+    },
     "noImplicitAny": false,
     "target": "es6",
     "module": "commonjs",

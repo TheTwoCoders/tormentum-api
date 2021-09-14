@@ -1,8 +1,8 @@
-import deleteUser from '../deleteUser'
-import { connect, disconnect } from '../../database'
-import UserNotFound from '../../exceptions/UserNotFound'
-import { createUser, deleteAllUsers, findUserById } from '../../repositories/UserRepository'
 import { Mongoose } from 'mongoose'
+import { connect, disconnect } from '@database/database'
+import UserNotFound from '@exceptions/UserNotFound'
+import { createUser, deleteAllUsers, findUserById } from '@repositories/UserRepository'
+import deleteUser from '@use_cases/deleteUser'
 
 describe('Use Case: deleteAccount', () => {
   let connection: Mongoose | null = null

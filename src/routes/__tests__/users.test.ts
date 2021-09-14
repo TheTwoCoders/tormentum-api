@@ -1,8 +1,8 @@
 import { Mongoose } from 'mongoose'
 import request from 'supertest'
-import { connect, disconnect } from '../../database'
-import { createUser, deleteAllUsers } from '../../repositories/UserRepository'
-import { app } from '../../server'
+import { connect, disconnect } from '@database/database'
+import { createUser, deleteAllUsers } from '@repositories/UserRepository'
+import { app } from '@server/server'
 
 describe('Routes: Users', () => {
   let connection: Mongoose | null = null

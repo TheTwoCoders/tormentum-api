@@ -1,8 +1,8 @@
 import express from 'express'
-import rootRoutes from './routes/root'
-import healthRoutes from './routes/health'
-import usersRoutes from './routes/users'
-import { handleError } from './server/error'
+import rootRoutes from '@routes/root'
+import healthRoutes from '@routes/health'
+import usersRoutes from '@routes/users'
+import { handleError } from './error'
 
 const app = express()
 

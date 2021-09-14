@@ -1,10 +1,10 @@
 import { mocked } from 'ts-jest/utils'
-import User from '../../domain/User'
-import CreateUserRequest from '../../resources/CreateUserRequest'
-import register from '../../use_cases/register'
-import { registerController } from '../UsersController'
+import User from '@domain/User'
+import CreateUserRequest from '@resources/CreateUserRequest'
+import register from '@use_cases/register'
+import { registerController } from '@controllers/UsersController'
 
-jest.mock('../../use_cases/register')
+jest.mock('@use_cases/register')
 
 const mockedRegister = mocked(register)
 

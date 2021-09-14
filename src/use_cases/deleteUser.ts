@@ -1,6 +1,6 @@
-import UserNotFound from '../exceptions/UserNotFound'
-import { deleteUserById } from '../repositories/UserRepository'
-import { findUserById } from '../repositories/UserRepository'
+import UserNotFound from '@exceptions/UserNotFound'
+import { deleteUserById } from '@repositories/UserRepository'
+import { findUserById } from '@repositories/UserRepository'
 
 const deleteUser = async (id: string): Promise<void> => {
   const user = await findUserById(id)

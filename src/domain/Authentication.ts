@@ -1,5 +1,5 @@
-import User from './User'
-import { generateJwtToken } from '../utils/token'
+import User from '@domain/User'
+import { generateJwtToken } from '@utils/token'
 
 class Authentication {
   user: User

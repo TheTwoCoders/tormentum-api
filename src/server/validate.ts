@@ -1,6 +1,6 @@
 import { validate } from 'class-validator'
-import ValidationException from '../exceptions/ValidationException'
-import ValidationErrorResponse from '../resources/ValidationErrorResponse'
+import ValidationException from '@exceptions/ValidationException'
+import ValidationErrorResponse from '@resources/ValidationErrorResponse'
 
 const validateRequest = async (
   requestObj: object

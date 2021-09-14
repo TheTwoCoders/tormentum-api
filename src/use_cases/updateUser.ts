@@ -1,6 +1,6 @@
-import UserNotFound from '../exceptions/UserNotFound'
-import { updateUserById } from '../repositories/UserRepository'
-import User from '../domain/User'
+import UserNotFound from '@exceptions/UserNotFound'
+import { updateUserById } from '@repositories/UserRepository'
+import User from '@domain/User'
 
 const updateUser = async (
   id: string,

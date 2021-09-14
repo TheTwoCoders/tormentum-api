@@ -1,6 +1,6 @@
-import User from '../domain/User'
-import UserModel, { userModelToDomain } from '../models/UserModel'
-import { encryptPassword } from '../utils/crypt'
+import User from '@domain/User'
+import UserModel, { userModelToDomain } from '@database/models/UserModel'
+import { encryptPassword } from '@utils/crypt'
 
 const createUser = async (
   username: string,
