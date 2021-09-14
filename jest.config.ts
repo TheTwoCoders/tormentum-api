@@ -10,16 +10,12 @@ const config: InitialOptionsTsJest = {
   setupFiles: ['dotenv/config'],
   watchPathIgnorePatterns: ['globalConfig'],
   moduleNameMapper: {
-    '^@controllers/(.*)$': '<rootDir>/controllers/$1',
+    '^@application/(.*)$': '<rootDir>/application/$1',
     '^@domain/(.*)$': '<rootDir>/domain/$1',
     '^@exceptions/(.*)$': '<rootDir>/exceptions/$1',
-    '^@routes/(.*)$': '<rootDir>/routes/$1',
-    '^@database/(.*)$': '<rootDir>/database/$1',
-    '^@repositories/(.*)$': '<rootDir>/repositories/$1',
+    '^@infra/(.*)$': '<rootDir>/infra/$1',
     '^@server/(.*)$': '<rootDir>/server/$1',
     '^@utils/(.*)$': '<rootDir>/utils/$1',
-    '^@resources/(.*)$': '<rootDir>/resources/$1',
-    '^@use_cases/(.*)$': '<rootDir>/use_cases/$1',
   },
   transform: {
     ...tsjPreset.transform,

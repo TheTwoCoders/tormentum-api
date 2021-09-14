@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
-import { startServer } from '@server/server'
-import { connect } from '@database/database'
+import { startServer } from '@infra/server/server'
+import { connect } from '@infra/database/database'
 
 const init = async () => {
   dotenv.config()

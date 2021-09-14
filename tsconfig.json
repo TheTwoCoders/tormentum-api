@@ -4,16 +4,12 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@controllers/*": ["controllers/*"],
+      "@application/*": ["application/*"],
       "@domain/*": ["domain/*"],
       "@exceptions/*": ["exceptions/*"],
-      "@routes/*": ["routes/*"],
-      "@database/*": ["database/*"],
-      "@repositories/*": ["repositories/*"],
+      "@infra/*": ["infra/*"],
       "@server/*": ["server/*"],
       "@utils/*": ["utils/*"],
-      "@resources/*": ["resources/*"],
-      "@use_cases/*": ["use_cases/*"],
     },
     "noImplicitAny": false,
     "target": "es6",
