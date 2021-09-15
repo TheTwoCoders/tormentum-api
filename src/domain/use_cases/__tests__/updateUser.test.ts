@@ -2,7 +2,8 @@ import { Mongoose } from 'mongoose'
 import updateUser from '@domain/use_cases/updateUser'
 import { connect, disconnect } from '@infra/database/database'
 import UserNotFound from '@domain/exceptions/UserNotFound'
-import { createUser, deleteAllUsers } from '@domain/repositories/UserRepository'
+import { deleteAllUsers } from '@domain/repositories/UserRepository'
+import mockUser from '@testHelpers/mockUser'
 
 describe('Use Case: updateUser', () => {
   let connection: Mongoose | null = null
@@ -36,9 +37,5 @@ describe('Use Case: updateUser', () => {
       await expect(updateUser('613c27a391f7b2af947b3c33', content)).rejects.toThrow(UserNotFound)
     })
   })
-
-  const mockUser = async () => {
-    return createUser('John', 'johnTest@gmail.com', 'password')
-  }
 })
 

@@ -1,8 +1,9 @@
 import { Mongoose } from 'mongoose'
 import { connect, disconnect } from '@infra/database/database'
 import UserNotFound from '@domain/exceptions/UserNotFound'
-import { createUser, deleteAllUsers, findUserById } from '@domain/repositories/UserRepository'
+import { deleteAllUsers, findUserById } from '@domain/repositories/UserRepository'
 import deleteUser from '@domain/use_cases/deleteUser'
+import mockUser from '@testHelpers/mockUser'
 
 describe('Use Case: deleteAccount', () => {
   let connection: Mongoose | null = null
@@ -35,9 +36,5 @@ describe('Use Case: deleteAccount', () => {
       await expect(deleteUser('613c27a391f7b2af947b3c33')).rejects.toThrow(UserNotFound)
     })
   })
-
-  const mockUser = async () => {
-    return createUser('John', 'johnTest@gmail.com', 'password')
-  }
 })
 

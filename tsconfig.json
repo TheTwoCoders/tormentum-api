@@ -6,10 +6,10 @@
     "paths": {
       "@application/*": ["application/*"],
       "@domain/*": ["domain/*"],
-      "@exceptions/*": ["exceptions/*"],
       "@infra/*": ["infra/*"],
       "@server/*": ["server/*"],
       "@utils/*": ["utils/*"],
+      "@testHelpers/*": ["testHelpers/*"]
     },
     "noImplicitAny": false,
     "target": "es6",
