@@ -4,7 +4,7 @@ import UserModel from '@infra/database/models/UserModel'
 import { connect, disconnect } from '@infra/database/database'
 import UserPasswordIncorrect from '@domain/exceptions/UserPasswordIncorrect'
 import UserNotFound from '@domain/exceptions/UserNotFound'
-import { createUser } from '@domain/repositories/UserRepository'
+import mockUser from '@testHelpers/mockUser'
 
 describe('Use Case: Login', () => {
   let connection: Mongoose | null = null
@@ -57,8 +57,4 @@ describe('Use Case: Login', () => {
         .toThrow(UserNotFound)
     })
   })
-
-  const mockUser = async (email: string, password: string) => {
-    return createUser('John', email, password)
-  }
 })

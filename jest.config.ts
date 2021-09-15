@@ -12,10 +12,10 @@ const config: InitialOptionsTsJest = {
   moduleNameMapper: {
     '^@application/(.*)$': '<rootDir>/application/$1',
     '^@domain/(.*)$': '<rootDir>/domain/$1',
-    '^@exceptions/(.*)$': '<rootDir>/exceptions/$1',
     '^@infra/(.*)$': '<rootDir>/infra/$1',
     '^@server/(.*)$': '<rootDir>/server/$1',
     '^@utils/(.*)$': '<rootDir>/utils/$1',
+    '^@testHelpers/(.*)$': '<rootDir>/testHelpers/$1',
   },
   transform: {
     ...tsjPreset.transform,
