@@ -22,6 +22,7 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async(req,res,next)=>{
   try{
     const requestObj = new LoginRequest(req.body)
+    await validateRequest(requestObj)
  
     const response = await loginController(requestObj)
     res.status(200)

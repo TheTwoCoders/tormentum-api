@@ -118,6 +118,28 @@ describe('Routes: Users', () => {
       })
     })
 
+    describe('and passing an invalid email', () => {
+      it('returns status 400 with validation error', async()=>{
+        const email = 'login1231254'
+        const password= '123456'
+        const response = await request(app)
+          .post('/users/login')
+          .send({
+            email,
+            password,
+          })
+          .set('Accept','application/json')
+          .expect('Content-Type', /json/)
+          .expect(400)
+
+        expect(response.body.message).toEqual('Validation error')
+        expect(response.body.details).toEqual([{
+          property: 'email',
+          message: '{"isEmail":"email must be an email"}'
+        }])
+      })
+    })
+
     describe('and passing valid parameters', () => {
       it('returns the authentication token', async()=>{
         const email = 'login@email.com'
