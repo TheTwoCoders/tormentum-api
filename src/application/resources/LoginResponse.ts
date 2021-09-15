@@ -1,9 +1,9 @@
 import Authentication from '@domain/entities/Authentication'
 
-class LoginResponse{
-  token:string;
+class LoginResponse {
+  token: string;
   
-  constructor(authentication: Authentication){
+  constructor(authentication: Authentication) {
     this.token = authentication.token
   }
 }

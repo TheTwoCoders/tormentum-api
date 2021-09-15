@@ -30,19 +30,19 @@ const registerController = async (
   }
 }
 
-const  loginController = async(
-  request:LoginRequest
-):Promise<LoginResponse> =>{
-  try{
+const loginController = async (
+  request: LoginRequest
+): Promise<LoginResponse> => {
+  try {
     const authentication = await login(
       request.email,
       request.password
     )
     return new LoginResponse(authentication)
-  }catch (e) {
-    if(e instanceof UserNotFound){
+  } catch (e) {
+    if (e instanceof UserNotFound) {
       throw new NotFoundException(e.message)
-    }else if(e instanceof UserPasswordIncorrect){
+    } else if (e instanceof UserPasswordIncorrect) {
       throw new BadRequestException(e.message)
     }
     throw e 

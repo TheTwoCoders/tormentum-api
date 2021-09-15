@@ -80,7 +80,7 @@ describe('Routes: Users', () => {
     })
   })
 
-  describe('when calling POST /users/login',()=>{
+  describe('when calling POST /users/login', () => {
     describe('and passing a non existent email', () => {
       it('returns status 404 not found', async () => {
         const email = 'notFound@email.com'
@@ -91,7 +91,7 @@ describe('Routes: Users', () => {
             email,
             password,
           })
-          .set('Accept','application/json')
+          .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(404)
 
@@ -108,9 +108,9 @@ describe('Routes: Users', () => {
           .post('/users/login')
           .send({
             email,
-            password:'wrongPassword',
+            password: 'wrongPassword',
           })
-          .set('Accept','application/json')
+          .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(400)
 
@@ -119,7 +119,7 @@ describe('Routes: Users', () => {
     })
 
     describe('and passing an invalid email', () => {
-      it('returns status 400 with validation error', async()=>{
+      it('returns status 400 with validation error', async () => {
         const email = 'login1231254'
         const password= '123456'
         const response = await request(app)
@@ -128,7 +128,7 @@ describe('Routes: Users', () => {
             email,
             password,
           })
-          .set('Accept','application/json')
+          .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(400)
 
@@ -141,7 +141,7 @@ describe('Routes: Users', () => {
     })
 
     describe('and passing valid parameters', () => {
-      it('returns the authentication token', async()=>{
+      it('returns the authentication token', async () => {
         const email = 'login@email.com'
         const password= '123456'
         await mockUser(email, password)
@@ -151,7 +151,7 @@ describe('Routes: Users', () => {
             email,
             password,
           })
-          .set('Accept','application/json')
+          .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(200)
 

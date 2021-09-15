@@ -19,15 +19,16 @@ router.post('/register', async (req, res, next) => {
     next(e)
   }
 })
-router.post('/login', async(req,res,next)=>{
-  try{
+
+router.post('/login', async (req, res, next) => {
+  try {
     const requestObj = new LoginRequest(req.body)
     await validateRequest(requestObj)
  
     const response = await loginController(requestObj)
     res.status(200)
     res.json(response)
-  }catch(e){
+  } catch (e) {
     next(e)
   }
 })

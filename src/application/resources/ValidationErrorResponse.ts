@@ -11,7 +11,6 @@ class ValidationErrorResponse extends ErrorResponse {
 
     super(message, details)
   }
-
 }
 
 export default ValidationErrorResponse

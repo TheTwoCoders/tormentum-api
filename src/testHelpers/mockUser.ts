@@ -4,7 +4,7 @@ import { createUser } from '@domain/repositories/UserRepository'
 const mockUser = async (
   email = 'standardTestEmail@email.com',
   password = 'standardPassword'
-):Promise<User> => {
+): Promise<User> => {
   return createUser('John', email, password)
 }
 

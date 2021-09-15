@@ -1,7 +1,6 @@
 import { IsEmail, MinLength } from 'class-validator'
 
 class LoginRequest {
- 
   @MinLength(6)
   password: string;
 

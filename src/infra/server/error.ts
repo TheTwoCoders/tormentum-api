@@ -36,7 +36,7 @@ const handleError = (res: express.Response, e: Error): void => {
     return respondError(res, 409, new ErrorResponse(e.message))
   } else if (e instanceof BadRequestException) {
     return respondError(res, 400, new ErrorResponse(e.message))
-  }else if (e instanceof NotFoundException) {
+  } else if (e instanceof NotFoundException) {
     return respondError(res, 404, new ErrorResponse(e.message))
   }
 
