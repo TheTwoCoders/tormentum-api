@@ -1,8 +1,11 @@
 import { Router } from 'express'
-import { loginController, registerController } from '@application/controllers/UsersController'
+import { deleteUserController, loginController, registerController } from '@application/controllers/UsersController'
 import CreateUserRequest from '@application/resources/CreateUserRequest'
 import { validateRequest } from '@infra/server/validate'
 import LoginRequest from '@application/resources/LoginRequest'
+import verifyAuthentication from '@application/middlewares/verifyAuthentication'
+import DeleteUserRequest from '@application/resources/DeleteUserRequest'
+import ForbiddenException from '@application/exceptions/ForbiddenException'
 
 const router = Router()
 
@@ -26,6 +29,22 @@ router.post('/login', async (req, res, next) => {
     await validateRequest(requestObj)
  
     const response = await loginController(requestObj)
+    res.status(200)
+    res.json(response)
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.delete('/:id', verifyAuthentication, async (req, res, next) => {
+  try {
+    const tokenUserId = req.userId
+    const request = new DeleteUserRequest({ id: req.params.id })
+    if (tokenUserId != request.id) {
+      throw new ForbiddenException(`You have no permission to delete the user ${request.id}`)
+    }
+
+    const response = await deleteUserController(request)
     res.status(200)
     res.json(response)
   } catch (e) {

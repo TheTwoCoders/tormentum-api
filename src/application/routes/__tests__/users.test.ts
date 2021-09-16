@@ -1,9 +1,10 @@
 import { Mongoose } from 'mongoose'
 import request from 'supertest'
 import { connect, disconnect } from '@infra/database/database'
-import { createUser, deleteAllUsers } from '@domain/repositories/UserRepository'
+import { createUser, deleteAllUsers, deleteUserById } from '@domain/repositories/UserRepository'
 import { app } from '@infra/server/server'
 import mockUser from '@testHelpers/mockUser'
+import Authentication from '@domain/entities/Authentication'
 
 describe('Routes: Users', () => {
   let connection: Mongoose | null = null
@@ -156,6 +157,75 @@ describe('Routes: Users', () => {
           .expect(200)
 
         expect(response.body.token).not.toBeNull()
+      })
+    })
+  })
+
+  describe('when calling DELETE /users/:id', () => {
+    describe('and passing a valid token with valid id', () => {
+      it('deletes the user returning the deleted id', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+
+        const response = await request(app)
+          .delete(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        expect(response.body.id).toEqual(user.id)
+      })
+    })
+
+    describe('and passing an invalid token', () => {
+      it('returns 401 unauthorized', async () => {
+        const user = await mockUser()
+
+        const response = await request(app)
+          .delete(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', 'Bearer invalid-token')
+          .expect('Content-Type', /json/)
+          .expect(401)
+
+        expect(response.body.message).toEqual('Invalid auth token provided')
+      })
+    })
+
+    describe('and passing a valid token with invalid id', () => {
+      it('returns 403 forbidden', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+        const invalidUserId = 'invalid-user-id'
+
+        const response = await request(app)
+          .delete(`/users/${invalidUserId}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(403)
+
+        expect(response.body.message)
+          .toEqual(`You have no permission to delete the user ${invalidUserId}`)
+      })
+    })
+
+    describe('and passing an already deleted user', () => {
+      it('returns 404 not found', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+        await deleteUserById(user.id)
+
+        const response = await request(app)
+          .delete(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(404)
+
+        expect(response.body.message)
+          .toEqual(`User not found for Id ${user.id}`)
       })
     })
   })

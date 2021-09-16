@@ -10,6 +10,9 @@ import UserNotFound from '@domain/exceptions/UserNotFound'
 import NotFoundException from '@application/exceptions/NotFoundException'
 import UserPasswordIncorrect from '@domain/exceptions/UserPasswordIncorrect'
 import BadRequestException from '@application/exceptions/BadRequestException'
+import DeleteUserRequest from '@application/resources/DeleteUserRequest'
+import DeleteUserResponse from '@application/resources/DeleteUserResponse'
+import deleteUser from '@domain/use_cases/deleteUser'
 
 const registerController = async (
   request: CreateUserRequest
@@ -49,4 +52,22 @@ const loginController = async (
   }
 }
 
-export { registerController, loginController }
+const deleteUserController = async (
+  request: DeleteUserRequest
+): Promise<DeleteUserResponse> => {
+  try {
+    const userId = request.id
+
+    await deleteUser(userId)
+
+    return new DeleteUserResponse(userId)
+  } catch (e) {
+    if (e instanceof UserNotFound) {
+      throw new NotFoundException(e.message)
+    }
+
+    throw e
+  }
+}
+
+export { registerController, loginController, deleteUserController }

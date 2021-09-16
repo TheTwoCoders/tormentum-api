@@ -1,6 +1,9 @@
 {
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
+  "ts-node": {
+    "files": true
+  },
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
@@ -9,6 +12,7 @@
       "@infra/*": ["infra/*"],
       "@server/*": ["server/*"],
       "@utils/*": ["utils/*"],
+      "@config/*": ["config/*"],
       "@testHelpers/*": ["testHelpers/*"]
     },
     "noImplicitAny": false,

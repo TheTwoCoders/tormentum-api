@@ -15,6 +15,7 @@ const config: InitialOptionsTsJest = {
     '^@infra/(.*)$': '<rootDir>/infra/$1',
     '^@server/(.*)$': '<rootDir>/server/$1',
     '^@utils/(.*)$': '<rootDir>/utils/$1',
+    '^@config/(.*)$': '<rootDir>/config/$1',
     '^@testHelpers/(.*)$': '<rootDir>/testHelpers/$1',
   },
   transform: {
