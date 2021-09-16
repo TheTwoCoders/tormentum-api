@@ -1,7 +1,7 @@
 import { Mongoose } from 'mongoose'
 import request from 'supertest'
 import { connect, disconnect } from '@infra/database/database'
-import { createUser, deleteAllUsers } from '@domain/repositories/UserRepository'
+import { createUser, deleteAllUsers, deleteUserById } from '@domain/repositories/UserRepository'
 import { app } from '@infra/server/server'
 import mockUser from '@testHelpers/mockUser'
 import Authentication from '@domain/entities/Authentication'
@@ -211,11 +211,11 @@ describe('Routes: Users', () => {
       })
     })
 
-    describe('and passing a already deleted user', () => {
-      it('returns 403 forbidden', async () => {
+    describe('and passing an already deleted user', () => {
+      it('returns 404 not found', async () => {
         const user = await mockUser()
         const auth = new Authentication(user)
-        await deleteAllUsers()
+        await deleteUserById(user.id)
 
         const response = await request(app)
           .delete(`/users/${user.id}`)
