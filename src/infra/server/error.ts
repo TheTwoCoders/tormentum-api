@@ -6,6 +6,7 @@ import ValidationErrorResponse from '@application/resources/ValidationErrorRespo
 import BadRequestException from '@application/exceptions/BadRequestException'
 import NotFoundException from '@application/exceptions/NotFoundException'
 import UnauthorizedException from '@application/exceptions/UnauthorizedException'
+import ForbiddenException from '@application/exceptions/ForbiddenException'
 
 const respondError = (
   res: express.Response,
@@ -41,6 +42,8 @@ const handleError = (res: express.Response, e: Error): void => {
     return respondError(res, 404, new ErrorResponse(e.message))
   } else if (e instanceof UnauthorizedException) {
     return respondError(res, 401, new ErrorResponse(e.message))
+  } else if (e instanceof ForbiddenException) {
+    return respondError(res, 403, new ErrorResponse(e.message))
   }
 
   return respondUnknownError(res, e.message)
