@@ -14,7 +14,8 @@ const verifyAuthentication = (
   }
 
   try {
-    verifyToken(token)
+    const payload = verifyToken(token)
+    req.userId = payload.id
     next()
   } catch (e) {
     throw new UnauthorizedException('Invalid auth token provided')

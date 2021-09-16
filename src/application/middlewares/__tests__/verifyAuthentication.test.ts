@@ -5,13 +5,14 @@ import verifyAuthentication from '../verifyAuthentication'
 
 describe('Middlewares: Authentication', () => {
   describe('when sending a valid token on Authorization', () => {
-    it('calls next function', () => {
+    it('calls next function and sets userId on req', () => {
       const validToken = generateJwtToken({ id: '123' })
       const { req, res, next } = setup(validToken)
 
       verifyAuthentication(req, res, next)
 
       expect(next).toHaveBeenCalledTimes(1)
+      expect(req.userId).toEqual('123')
     })
   })
 
