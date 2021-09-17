@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import {
-  deleteUserController,
   updateUserController
 } from '@application/controllers/UsersController'
 import CreateUserRequest from '@application/resources/CreateUserRequest'
@@ -12,6 +11,7 @@ import ForbiddenException from '@application/exceptions/ForbiddenException'
 import UpdateUserRequest from '@application/resources/UpdateUserRequest'
 import { registerController } from '@application/controllers/registerController'
 import { loginController } from '@application/controllers/loginController'
+import { deleteUserController } from '@application/controllers/deleteUserController'
 
 const router = Router()
 
