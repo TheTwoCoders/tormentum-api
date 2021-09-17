@@ -4,7 +4,7 @@ import DeleteUserResponse from '@application/resources/DeleteUserResponse'
 import UserNotFound from '@domain/exceptions/UserNotFound'
 import deleteUser from '@domain/use_cases/deleteUser'
 import { mocked } from 'ts-jest/utils'
-import { deleteUserController } from '../deleteUserController'
+import deleteUserController from '../deleteUserController'
 
 jest.mock('@domain/use_cases/deleteUser')
 

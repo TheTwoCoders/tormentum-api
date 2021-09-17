@@ -5,7 +5,7 @@ import User from '@domain/entities/User'
 import UserNotFound from '@domain/exceptions/UserNotFound'
 import updateUser from '@domain/use_cases/updateUser'
 import { mocked } from 'ts-jest/utils'
-import { updateUserController } from '../updateUserController'
+import updateUserController from '../updateUserController'
 
 jest.mock('@domain/use_cases/updateUser')
 

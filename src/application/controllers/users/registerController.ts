@@ -23,4 +23,4 @@ const registerController = async (
   }
 }
 
-export { registerController }
+export default registerController

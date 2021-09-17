@@ -7,7 +7,7 @@ import UserNotFound from '@domain/exceptions/UserNotFound'
 import UserPasswordIncorrect from '@domain/exceptions/UserPasswordIncorrect'
 import login from '@domain/use_cases/login'
 import { mocked } from 'ts-jest/utils'
-import { loginController } from '../loginController'
+import loginController from '../loginController'
 
 jest.mock('@domain/use_cases/login')
 

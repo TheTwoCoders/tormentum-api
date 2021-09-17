@@ -3,7 +3,7 @@ import User from '@domain/entities/User'
 import register from '@domain/use_cases/register'
 import { mocked } from 'ts-jest/utils'
 import ConflictException from '@application/exceptions/ConflictException'
-import { registerController } from '@application/controllers/users/registerController'
+import registerController from '@application/controllers/users/registerController'
 import UserDuplicated from '@domain/exceptions/UserDuplicated'
 
 jest.mock('@domain/use_cases/register')

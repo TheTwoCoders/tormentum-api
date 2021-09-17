@@ -22,4 +22,4 @@ const updateUserController = async (
   }
 }
 
-export { updateUserController }
+export default updateUserController

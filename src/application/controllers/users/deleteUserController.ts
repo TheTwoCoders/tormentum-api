@@ -22,4 +22,4 @@ const deleteUserController = async (
   }
 }
 
-export { deleteUserController }
+export default deleteUserController

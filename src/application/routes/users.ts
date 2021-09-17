@@ -6,10 +6,10 @@ import verifyAuthentication from '@application/middlewares/verifyAuthentication'
 import DeleteUserRequest from '@application/resources/DeleteUserRequest'
 import ForbiddenException from '@application/exceptions/ForbiddenException'
 import UpdateUserRequest from '@application/resources/UpdateUserRequest'
-import { registerController } from '@application/controllers/users/registerController'
-import { loginController } from '@application/controllers/users/loginController'
-import { deleteUserController } from '@application/controllers/users/deleteUserController'
-import { updateUserController } from '@application/controllers/users/updateUserController'
+import registerController from '@application/controllers/users/registerController'
+import loginController from '@application/controllers/users/loginController'
+import deleteUserController from '@application/controllers/users/deleteUserController'
+import updateUserController from '@application/controllers/users/updateUserController'
 
 const router = Router()
 

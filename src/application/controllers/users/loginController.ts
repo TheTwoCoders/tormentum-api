@@ -25,4 +25,4 @@ const loginController = async (
   }
 }
 
-export { loginController }
+export default loginController
