@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import type { InitialOptionsTsJest } from 'ts-jest/dist/types'
-import { defaults as tsjPreset } from 'ts-jest/presets'
-
-const mongoDbPrests = require('@shelf/jest-mongodb/jest-preset')
 
 const config: InitialOptionsTsJest = {
-  ...mongoDbPrests,
+  preset: 'ts-jest',
   rootDir: 'src',
   setupFiles: ['dotenv/config'],
   watchPathIgnorePatterns: ['globalConfig'],
@@ -18,9 +15,6 @@ const config: InitialOptionsTsJest = {
     '^@config/(.*)$': '<rootDir>/config/$1',
     '^@testHelpers/(.*)$': '<rootDir>/testHelpers/$1',
   },
-  transform: {
-    ...tsjPreset.transform,
-  }
 }
 
 export default config

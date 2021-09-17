@@ -1,19 +1,22 @@
-import { Mongoose } from 'mongoose'
 import updateUser from '@domain/use_cases/updateUser'
-import { connect, disconnect } from '@infra/database/database'
 import UserNotFound from '@domain/exceptions/UserNotFound'
 import { deleteAllUsers } from '@domain/repositories/UserRepository'
 import mockUser from '@testHelpers/mockUser'
+import {
+  connectMemoryDb,
+  disconnectMemoryDb,
+  TestDbConnection
+} from '@testHelpers/memoryDatabase'
 
 describe('Use Case: updateUser', () => {
-  let connection: Mongoose | null = null
+  let connection: TestDbConnection | null = null
 
   beforeAll(async () => {
-    connection = await connect(global.__MONGO_DB_NAME__)
+    connection = await connectMemoryDb()
   })
 
   afterAll(async () => {
-    await disconnect(connection)
+    await disconnectMemoryDb(connection)
   })
 
   beforeEach(async () => {

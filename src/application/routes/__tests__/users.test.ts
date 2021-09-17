@@ -1,20 +1,19 @@
-import { Mongoose } from 'mongoose'
 import request from 'supertest'
-import { connect, disconnect } from '@infra/database/database'
 import { createUser, deleteAllUsers, deleteUserById } from '@domain/repositories/UserRepository'
 import { app } from '@infra/server/server'
 import mockUser from '@testHelpers/mockUser'
 import Authentication from '@domain/entities/Authentication'
+import { connectMemoryDb, disconnectMemoryDb, TestDbConnection } from '@testHelpers/memoryDatabase'
 
 describe('Routes: Users', () => {
-  let connection: Mongoose | null = null
+  let connection: TestDbConnection | null = null
 
   beforeAll(async () => {
-    connection = await connect(global.__MONGO_DB_NAME__)
+    connection = await connectMemoryDb()
   })
 
   afterAll(async () => {
-    await disconnect(connection)
+    await disconnectMemoryDb(connection)
   })
 
   beforeEach(() => {

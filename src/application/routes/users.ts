@@ -1,10 +1,4 @@
 import { Router } from 'express'
-import {
-  deleteUserController,
-  loginController,
-  registerController,
-  updateUserController
-} from '@application/controllers/UsersController'
 import CreateUserRequest from '@application/resources/CreateUserRequest'
 import { validateRequest } from '@infra/server/validate'
 import LoginRequest from '@application/resources/LoginRequest'
@@ -12,6 +6,10 @@ import verifyAuthentication from '@application/middlewares/verifyAuthentication'
 import DeleteUserRequest from '@application/resources/DeleteUserRequest'
 import ForbiddenException from '@application/exceptions/ForbiddenException'
 import UpdateUserRequest from '@application/resources/UpdateUserRequest'
+import registerController from '@application/controllers/users/registerController'
+import loginController from '@application/controllers/users/loginController'
+import deleteUserController from '@application/controllers/users/deleteUserController'
+import updateUserController from '@application/controllers/users/updateUserController'
 
 const router = Router()
 

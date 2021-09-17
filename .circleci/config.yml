@@ -4,23 +4,54 @@ orbs:
   node: circleci/node@4.7.0
   heroku: circleci/heroku@1.2.6
 jobs:
-  test:
+  prepare:
     executor:
       name: node/default
       tag: '16.8.0'
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: yarn
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          command: yarn install
+          name: Installing Packages
+      - save_cache:
+          paths:
+            - node_modules
+            - yarn.lock
+          key: v1-dependencies-{{ checksum "package.json" }}
+  lint:
+    executor:
+      name: node/default
+      tag: '16.8.0'
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          command: yarn lint
+          name: Lint Code
+  test:
+    executor:
+      name: node/default
+      tag: '16.8.0'
+    parallelism: 4
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
       - run:
           command: yarn setup
           name: Setup Env
       - run:
-          command: yarn lint
-          name: Lint Code
-      - run:
-          command: yarn test
           name: Run Tests
+          command: |
+            TEST=$(circleci tests glob **/*.test.ts | circleci tests split)
+            yarn test $TEST
+
   deploy:
     executor: heroku/default
     steps:
@@ -30,10 +61,17 @@ jobs:
 workflows:
   test_and_deploy:
     jobs:
-      - test
+      - prepare
+      - lint:
+          requires:
+            - prepare
+      - test:
+          requires:
+            - prepare
       - deploy:
           filters:
             branches:
               only: main
           requires:
+            - lint
             - test

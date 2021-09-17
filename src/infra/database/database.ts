@@ -1,22 +1,24 @@
-import mongoose, { Mongoose } from 'mongoose'
+import mongoose, { Mongoose, ConnectOptions } from 'mongoose'
 
-const connect = async (customDbName = ''): Promise<Mongoose> => {
-  return mongoose.connect(dbUrl(customDbName))
+const connect = async (
+  dbUrl: string | undefined = process.env.MONGODB_URL,
+): Promise<Mongoose> => {
+  if (dbUrl === undefined) {
+    throw Error('You need to set MONGODB_URL env variable')
+  }
+
+  return mongoose.connect(
+    dbUrl,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    } as ConnectOptions
+  )
 }
 
 const disconnect = async (connection: Mongoose | null): Promise<void> => {
   if (connection === null) return
-  connection.disconnect()
-}
-
-const dbUrl = (customDbName: string): string => {
-  const mongoUrl = process.env.MONGODB_URL
-
-  if (mongoUrl === undefined) {
-    throw Error('You need to set MONGODB_URL env variable')
-  }
-
-  return `${mongoUrl}${customDbName}`
+  await connection.disconnect()
 }
 
 export { connect, disconnect }

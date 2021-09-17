@@ -1,5 +1,3 @@
-import { Mongoose } from 'mongoose'
-import { connect, disconnect } from '@infra/database/database'
 import UserModel from '@infra/database/models/UserModel'
 import {
   createUser,
@@ -9,16 +7,21 @@ import {
   findUserById,
   updateUserById
 } from '@domain/repositories/UserRepository'
+import {
+  connectMemoryDb,
+  disconnectMemoryDb,
+  TestDbConnection
+} from '@testHelpers/memoryDatabase'
 
 describe('Repositories: UserRepository', () => {
-  let connection: Mongoose | null = null
+  let connection: TestDbConnection | null = null
 
   beforeAll(async () => {
-    connection = await connect(global.__MONGO_DB_NAME__)
+    connection = await connectMemoryDb()
   })
 
   afterAll(async () => {
-    await disconnect(connection)
+    await disconnectMemoryDb(connection)
   })
 
   beforeEach(async () => {
