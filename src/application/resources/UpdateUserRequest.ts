@@ -16,6 +16,7 @@ class UpdateUserRequest {
   email: string
 
   constructor(body: Record<string, string>) {
+    this.id = body.id
     this.username = body.username
     this.email = body.email
   }
