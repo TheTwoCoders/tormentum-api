@@ -10,7 +10,7 @@ jest.mock('@domain/use_cases/deleteUser')
 
 const mockedDeleteUser = mocked(deleteUser)
 
-describe('Name of the group', () => {
+describe('Controller: Delete User Controller', () => {
   describe('Delete User Controller', () => {
     describe('when sending a valid request', () => {
       it('calls delete user use case with all params', async () => {

@@ -2,6 +2,7 @@ import CreateUserRequest from '@application/resources/CreateUserRequest'
 import User from '@domain/entities/User'
 import register from '@domain/use_cases/register'
 import { mocked } from 'ts-jest/utils'
+import ConflictException from '@application/exceptions/ConflictException'
 import { registerController } from '@application/controllers/registerController'
 
 jest.mock('@domain/use_cases/register')
@@ -32,6 +33,24 @@ describe('Controller: Register Controller', () => {
           request.email,
           request.password
         )
+      })
+    })
+
+    describe('when sending an already existent user', () => {
+      it('throws ConflictException', async () => {
+        const request = new CreateUserRequest({
+          name: 'john',
+          email: 'test@test.com',
+          password: '123456'
+        })
+        mockedRegister
+          .mockImplementation(async () => {
+            throw new ConflictException('user already exists')
+          })
+
+        await expect(registerController(request))
+          .rejects
+          .toThrow(ConflictException)
       })
     })
   })

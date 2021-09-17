@@ -11,7 +11,7 @@ jest.mock('@domain/use_cases/updateUser')
 
 const mockedUpdateUser = mocked(updateUser)
 
-describe('Name of the group', () => {
+describe('Controller: Update User Controller', () => {
   describe('Update user Controller', () => {
     describe('when sending a valid request', () => {
       it('calls update user use case', async () => {
