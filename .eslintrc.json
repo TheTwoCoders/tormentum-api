@@ -48,6 +48,6 @@
     "no-multi-spaces": "error",
     "import/no-unresolved": "off",
     "import/newline-after-import": ["error", { "count": 1 }],
-    "max-len": ["error", { "code": 80 }]
+    "max-len": ["error", { "code": 100 }]
   }
 }

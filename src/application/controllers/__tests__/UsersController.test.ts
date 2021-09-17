@@ -148,10 +148,14 @@ describe('Controllers: Users Controller', () => {
       })
     })
   })
+
   describe('Update user Controller', () => {
     describe('when sending a valid request', () => {
-      it('calls update user use case ', async () => {
-        const request = new UpdateUserRequest({ id: '123', email: 'test@gmail.com' })
+      it('calls update user use case', async () => {
+        const request = new UpdateUserRequest({
+          id: '123',
+          email: 'test@gmail.com'
+        })
         const expectedResponse = new UpdateUserResponse('123')
         const user = new User('123', 'john', 'test@gmail.com', 'password')
         mockedUpdateUser.mockImplementation(async () => user)
@@ -161,9 +165,13 @@ describe('Controllers: Users Controller', () => {
         expect(response).toEqual(expectedResponse)
       })
     })
+
     describe('when sending an non existent user', () => {
       it('throws NotFoundException', async () => {
-        const request = new UpdateUserRequest({ id: '123', email: 'test2@gmail.com' })
+        const request = new UpdateUserRequest({
+          id: '123',
+          email: 'test2@gmail.com'
+        })
         mockedUpdateUser.mockImplementation(async () => null)
 
         await expect(updateUserController(request))

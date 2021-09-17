@@ -1,5 +1,3 @@
-import User from "@domain/entities/User";
-
 class UpdateUserResponse {
   id: string;
 

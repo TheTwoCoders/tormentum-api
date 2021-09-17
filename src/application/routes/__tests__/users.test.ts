@@ -229,6 +229,7 @@ describe('Routes: Users', () => {
       })
     })
   })
+
   describe('when calling PATCH /users/:id', () => {
     describe('and passing a valid token with valid id', () => {
       it('updates the user returning updated user ID', async () => {
@@ -244,8 +245,9 @@ describe('Routes: Users', () => {
           .expect(200)
 
         expect(response.body.id).toEqual(user.id)
-      });
-    });
+      })
+    })
+
     describe('and passing an invalid token', () => {
       it('returns 401 unauthorized', async () => {
         const user = await mockUser()
@@ -258,8 +260,9 @@ describe('Routes: Users', () => {
           .expect(401)
 
         expect(response.body.message).toEqual('Invalid auth token provided')
-      });
-    });
+      })
+    })
+
     describe('and passing a valid token with invalid id', () => {
       it('returns 403 forbidden', async () => {
         const user = await mockUser()
@@ -277,6 +280,7 @@ describe('Routes: Users', () => {
           .toEqual(`You have no permission to update the user ${invalidUserId}`)
       })
     })
+
     describe('and passing an invalid email', () => {
       it('returns status 400 with validation error', async () => {
         const invalidEmail = 'abc123'

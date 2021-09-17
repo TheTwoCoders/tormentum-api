@@ -1,5 +1,10 @@
-import { request, Router } from 'express'
-import { deleteUserController, loginController, registerController, updateUserController } from '@application/controllers/UsersController'
+import { Router } from 'express'
+import {
+  deleteUserController,
+  loginController,
+  registerController,
+  updateUserController
+} from '@application/controllers/UsersController'
 import CreateUserRequest from '@application/resources/CreateUserRequest'
 import { validateRequest } from '@infra/server/validate'
 import LoginRequest from '@application/resources/LoginRequest'
