@@ -172,7 +172,9 @@ describe('Controllers: Users Controller', () => {
           id: '123',
           email: 'test2@gmail.com'
         })
-        mockedUpdateUser.mockImplementation(async () => null)
+        mockedUpdateUser.mockImplementation(async () => {
+          throw new UserNotFound('user not found')
+        })
 
         await expect(updateUserController(request))
           .rejects

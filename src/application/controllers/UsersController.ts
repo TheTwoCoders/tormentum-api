@@ -76,9 +76,19 @@ const deleteUserController = async (
 const updateUserController = async (
   request: UpdateUserRequest
 ): Promise<UpdateUserResponse> => {
-  const user = await updateUser(request.id, { username: request.username, email: request.email })
-  if (user === null) throw new NotFoundException('User not found, unable to update')
-  return new UpdateUserResponse(user.id)
+  try {
+    const user = await updateUser(
+      request.id,
+      { username: request.username, email: request.email }
+    )
+
+    return new UpdateUserResponse(user.id)
+  } catch (e) {
+    if (e instanceof UserNotFound) {
+      throw new NotFoundException(e.message)
+    }
+    throw e
+  }
 }
 
 export { registerController, loginController, deleteUserController, updateUserController }

@@ -9,11 +9,11 @@ const updateUser = async (
     email?: string,
     password?: string
   }
-): Promise<User | null> => {
+): Promise<User> => {
   const updatedUser = await updateUserById(id, content)
 
   if (updatedUser == null) {
-    throw new UserNotFound(`User not found for Id ${id}`)
+    throw new UserNotFound(`User not found for id: ${id}`)
   }
 
   return updatedUser

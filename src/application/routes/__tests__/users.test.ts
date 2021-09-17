@@ -281,6 +281,24 @@ describe('Routes: Users', () => {
       })
     })
 
+    describe('and passing a non existent user', () => {
+      it('returns 404 not found', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+        await deleteUserById(user.id)
+
+        const response = await request(app)
+          .patch(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(404)
+
+        expect(response.body.message)
+          .toEqual(`User not found for id: ${user.id}`)
+      })
+    })
+
     describe('and passing an invalid email', () => {
       it('returns status 400 with validation error', async () => {
         const invalidEmail = 'abc123'
