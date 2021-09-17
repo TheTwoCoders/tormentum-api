@@ -1,18 +1,21 @@
-import { Mongoose } from 'mongoose'
 import register from '@domain/use_cases/register'
-import { connect, disconnect } from '@infra/database/database'
 import UserDuplicated from '@domain/exceptions/UserDuplicated'
 import { findUserByEmail } from '@domain/repositories/UserRepository'
+import {
+  connectMemoryDb,
+  disconnectMemoryDb,
+  TestDbConnection
+} from '@testHelpers/memoryDatabase'
 
 describe('Use Case: Register', () => {
-  let connection: Mongoose | null = null
+  let connection: TestDbConnection | null = null
 
   beforeAll(async () => {
-    connection = await connect(global.__MONGO_DB_NAME__)
+    connection = await connectMemoryDb()
   })
 
   afterAll(async () => {
-    await disconnect(connection)
+    await disconnectMemoryDb(connection)
   })
 
   describe('when passing a non registered email', () => {

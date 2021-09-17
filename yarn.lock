@@ -579,15 +579,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@shelf/jest-mongodb@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@shelf/jest-mongodb/-/jest-mongodb-2.0.3.tgz#0e4a99d70b88582e116228494f4d066a9912db74"
-  integrity sha512-wS6+ms/AfpiSwmWK4WBeBUTA5DPC9aKvnXRXAJ62WTv8GxTHh+JMmu/5NeoA9r5DuuB52nK2YH12bpJFbxM1fw==
-  dependencies:
-    debug "4.3.2"
-    mongodb-memory-server "7.3.6"
-    uuid "8.3.2"
-
 "@sideway/address@^4.1.0":
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.2.tgz#811b84333a335739d3969cfc434736268170cad1"
@@ -1170,7 +1161,7 @@ astral-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
-async-mutex@^0.3.0:
+async-mutex@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/async-mutex/-/async-mutex-0.3.2.tgz#1485eda5bda1b0ec7c8df1ac2e815757ad1831df"
   integrity sha512-HuTK7E7MT7jZEh1P9GtRW9+aTWiDWWi9InbZ5hjxrnRa39KS4BW04+xLBhYNS2aXhHUIKZSw3gj4Pn1pj+qGAA==
@@ -1690,7 +1681,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@4.3.2, debug@4.x, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1, debug@^4.3.2:
+debug@4, debug@4.x, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1, debug@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
   integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
@@ -2290,7 +2281,7 @@ finalhandler@~1.1.2:
     statuses "~1.5.0"
     unpipe "~1.0.0"
 
-find-cache-dir@^3.3.1:
+find-cache-dir@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-3.3.2.tgz#b30c5b6eff0730731aea9bbd9dbecbd80256d64b"
   integrity sha512-wXZV5emFEjrridIgED11OoUKLxiYjAcqot/NJdAkOhlJ+vGzwhOAfcG5OX1jP+S0PcjEn8bdMJv+g2jwQ3Onig==
@@ -3757,16 +3748,16 @@ mongodb-connection-string-url@^2.0.0:
     "@types/whatwg-url" "^8.2.1"
     whatwg-url "^9.1.0"
 
-mongodb-memory-server-core@7.3.6:
-  version "7.3.6"
-  resolved "https://registry.yarnpkg.com/mongodb-memory-server-core/-/mongodb-memory-server-core-7.3.6.tgz#9c16cf120e498011a8702e7735271cbe878dd6e5"
-  integrity sha512-dxprJ5Xqb0y/9nqv709BGf8Cz4dnInhG3sTuYvMJijK4cAHYxk0xkKrvZX2X9PrYiCQqKix59hHMBGyBetN3hg==
+mongodb-memory-server-core@7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/mongodb-memory-server-core/-/mongodb-memory-server-core-7.4.0.tgz#5fd5bf6ecef0a3753d1ccd399c12e5bcb335257b"
+  integrity sha512-y7/F+foGefthQVMhloHycjtkqStQtNvDRbpjkMN54FXm0+aE3qgUssFfBhfrxIhRHD2/g3Jm4Ms47WmLUPVQlA==
   dependencies:
     "@types/tmp" "^0.2.0"
-    async-mutex "^0.3.0"
+    async-mutex "^0.3.2"
     camelcase "^6.1.0"
     debug "^4.2.0"
-    find-cache-dir "^3.3.1"
+    find-cache-dir "^3.3.2"
     get-port "^5.1.1"
     https-proxy-agent "^5.0.0"
     md5-file "^5.0.0"
@@ -3780,12 +3771,12 @@ mongodb-memory-server-core@7.3.6:
     uuid "^8.3.1"
     yauzl "^2.10.0"
 
-mongodb-memory-server@7.3.6:
-  version "7.3.6"
-  resolved "https://registry.yarnpkg.com/mongodb-memory-server/-/mongodb-memory-server-7.3.6.tgz#6df78425aaa01439556ba3f53e3042f82b3fa5c4"
-  integrity sha512-JfuY7uJD9TZxq6C4YVuCjiP2v0V/NYb19Wki6rFovdJvkgxGp5/KXKaazu47leECYAtJc2ajW1c009M3hRM+6A==
+mongodb-memory-server@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/mongodb-memory-server/-/mongodb-memory-server-7.4.0.tgz#25ca8455bb03c73da871de8fb8339d4fdbe36d90"
+  integrity sha512-V9sCsPprJxPMK68ZodidL6Z/J4DOziyGpGlx/VCIJfT6XcZ/907I8ZWGn3J92CWXPStsuIgW5wgFhPCH1RK35w==
   dependencies:
-    mongodb-memory-server-core "7.3.6"
+    mongodb-memory-server-core "7.4.0"
     tslib "^2.3.0"
 
 mongodb@4.1.1:
@@ -5201,7 +5192,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@8.3.2, uuid@^8.3.1:
+uuid@^8.3.1:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==

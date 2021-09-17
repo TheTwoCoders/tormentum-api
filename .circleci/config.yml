@@ -19,18 +19,17 @@ jobs:
       - run:
           command: yarn setup
           name: Setup Env
+      - save_cache:
+          paths:
+            - node_modules
+            - yarn.lock
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           command: yarn lint
           name: Lint Code
       - run:
           command: yarn test
           name: Run Tests
-      - save_cache:
-          paths:
-            - node_modules
-            - yarn.lock
-            - ./node_modules/.cache/mongodb-memory-server/mongodb-binaries
-          key: v1-dependencies-{{ checksum "package.json" }}
 
   deploy:
     executor: heroku/default
