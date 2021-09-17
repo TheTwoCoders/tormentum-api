@@ -10,8 +10,12 @@ jobs:
       tag: '16.8.0'
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: yarn
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          command: yarn install
+          name: Installing Packages
       - run:
           command: yarn setup
           name: Setup Env
@@ -21,6 +25,13 @@ jobs:
       - run:
           command: yarn test
           name: Run Tests
+      - save_cache:
+          paths:
+            - node_modules
+            - yarn.lock
+            - ./node_modules/.cache/mongodb-memory-server/mongodb-binaries
+          key: v1-dependencies-{{ checksum "package.json" }}
+
   deploy:
     executor: heroku/default
     steps:
