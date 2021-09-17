@@ -3,7 +3,8 @@ import User from '@domain/entities/User'
 import register from '@domain/use_cases/register'
 import { mocked } from 'ts-jest/utils'
 import ConflictException from '@application/exceptions/ConflictException'
-import { registerController } from '@application/controllers/registerController'
+import { registerController } from '@application/controllers/users/registerController'
+import UserDuplicated from '@domain/exceptions/UserDuplicated'
 
 jest.mock('@domain/use_cases/register')
 const mockedRegister = mocked(register)
@@ -45,7 +46,7 @@ describe('Controller: Register Controller', () => {
         })
         mockedRegister
           .mockImplementation(async () => {
-            throw new ConflictException('user already exists')
+            throw new UserDuplicated('User duplicated for email test@test.com')
           })
 
         await expect(registerController(request))
