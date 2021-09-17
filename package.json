@@ -10,6 +10,11 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "test": "jest"
   },
+  "config": {
+    "mongodbMemoryServer": {
+      "preferGlobalPath": false
+    }
+  },
   "author": "TheTwoCoders",
   "license": "ISC",
   "dependencies": {
