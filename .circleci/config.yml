@@ -8,6 +8,7 @@ jobs:
     executor:
       name: node/default
       tag: '16.8.0'
+    parallelism: 4
     steps:
       - checkout
       - restore_cache:
@@ -28,8 +29,10 @@ jobs:
           command: yarn lint
           name: Lint Code
       - run:
-          command: yarn test
           name: Run Tests
+          command: |
+            TEST=$(circleci tests glob **/*.test.ts | circleci tests split)
+            yarn test $TEST
 
   deploy:
     executor: heroku/default
