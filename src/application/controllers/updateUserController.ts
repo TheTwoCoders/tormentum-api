@@ -1,7 +1,7 @@
-import UserNotFound from '@domain/exceptions/UserNotFound'
 import NotFoundException from '@application/exceptions/NotFoundException'
 import UpdateUserRequest from '@application/resources/UpdateUserRequest'
 import UpdateUserResponse from '@application/resources/UpdateUserResponse'
+import UserNotFound from '@domain/exceptions/UserNotFound'
 import updateUser from '@domain/use_cases/updateUser'
 
 const updateUserController = async (

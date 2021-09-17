@@ -1,19 +1,17 @@
-import { mocked } from 'ts-jest/utils'
-import User from '@domain/entities/User'
-import {
-  updateUserController
-} from '@application/controllers/UsersController'
-import UserNotFound from '@domain/exceptions/UserNotFound'
 import NotFoundException from '@application/exceptions/NotFoundException'
 import UpdateUserRequest from '@application/resources/UpdateUserRequest'
 import UpdateUserResponse from '@application/resources/UpdateUserResponse'
+import User from '@domain/entities/User'
+import UserNotFound from '@domain/exceptions/UserNotFound'
 import updateUser from '@domain/use_cases/updateUser'
+import { mocked } from 'ts-jest/utils'
+import { updateUserController } from '../updateUserController'
 
 jest.mock('@domain/use_cases/updateUser')
 
 const mockedUpdateUser = mocked(updateUser)
 
-describe('Controllers: Users Controller', () => {
+describe('Name of the group', () => {
   describe('Update user Controller', () => {
     describe('when sending a valid request', () => {
       it('calls update user use case', async () => {

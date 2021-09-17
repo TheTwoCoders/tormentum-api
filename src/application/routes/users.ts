@@ -1,7 +1,4 @@
 import { Router } from 'express'
-import {
-  updateUserController
-} from '@application/controllers/UsersController'
 import CreateUserRequest from '@application/resources/CreateUserRequest'
 import { validateRequest } from '@infra/server/validate'
 import LoginRequest from '@application/resources/LoginRequest'
@@ -12,6 +9,7 @@ import UpdateUserRequest from '@application/resources/UpdateUserRequest'
 import { registerController } from '@application/controllers/registerController'
 import { loginController } from '@application/controllers/loginController'
 import { deleteUserController } from '@application/controllers/deleteUserController'
+import { updateUserController } from '@application/controllers/updateUserController'
 
 const router = Router()
 
