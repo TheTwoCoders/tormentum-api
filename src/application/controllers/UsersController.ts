@@ -13,6 +13,9 @@ import BadRequestException from '@application/exceptions/BadRequestException'
 import DeleteUserRequest from '@application/resources/DeleteUserRequest'
 import DeleteUserResponse from '@application/resources/DeleteUserResponse'
 import deleteUser from '@domain/use_cases/deleteUser'
+import UpdateUserRequest from '@application/resources/UpdateUserRequest'
+import UpdateUserResponse from '@application/resources/UpdateUserResponse'
+import updateUser from '@domain/use_cases/updateUser'
 
 const registerController = async (
   request: CreateUserRequest
@@ -48,7 +51,7 @@ const loginController = async (
     } else if (e instanceof UserPasswordIncorrect) {
       throw new BadRequestException(e.message)
     }
-    throw e 
+    throw e
   }
 }
 
@@ -70,4 +73,12 @@ const deleteUserController = async (
   }
 }
 
-export { registerController, loginController, deleteUserController }
+const updateUserController = async (
+  request: UpdateUserRequest
+): Promise<UpdateUserResponse> => {
+  const user = await updateUser(request.id, { username: request.username, email: request.email })
+  if (user === null) throw new NotFoundException('User not found, unable to update')
+  return new UpdateUserResponse(user.id)
+}
+
+export { registerController, loginController, deleteUserController, updateUserController }

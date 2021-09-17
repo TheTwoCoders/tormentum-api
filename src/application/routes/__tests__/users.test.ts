@@ -34,7 +34,7 @@ describe('Routes: Users', () => {
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(201)
-        
+
         expect(response.body.id).not.toBeNull()
       })
     })
@@ -52,7 +52,7 @@ describe('Routes: Users', () => {
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(409)
-        
+
         expect(response.body.message).toEqual(`User duplicated for email ${user.email}`)
         expect(response.body.details).toEqual([])
       })
@@ -71,7 +71,7 @@ describe('Routes: Users', () => {
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(400)
-        
+
         expect(response.body.message).toEqual('Validation error')
         expect(response.body.details).toEqual([{
           property: 'email',
@@ -85,7 +85,7 @@ describe('Routes: Users', () => {
     describe('and passing a non existent email', () => {
       it('returns status 404 not found', async () => {
         const email = 'notFound@email.com'
-        const password= '123456'
+        const password = '123456'
         const response = await request(app)
           .post('/users/login')
           .send({
@@ -103,7 +103,7 @@ describe('Routes: Users', () => {
     describe('and passing an incorrect password', () => {
       it('returns status 400 bad request', async () => {
         const email = 'notFound@email.com'
-        const password= '123456'
+        const password = '123456'
         await mockUser(email, password)
         const response = await request(app)
           .post('/users/login')
@@ -122,7 +122,7 @@ describe('Routes: Users', () => {
     describe('and passing an invalid email', () => {
       it('returns status 400 with validation error', async () => {
         const email = 'login1231254'
-        const password= '123456'
+        const password = '123456'
         const response = await request(app)
           .post('/users/login')
           .send({
@@ -144,7 +144,7 @@ describe('Routes: Users', () => {
     describe('and passing valid parameters', () => {
       it('returns the authentication token', async () => {
         const email = 'login@email.com'
-        const password= '123456'
+        const password = '123456'
         await mockUser(email, password)
         const response = await request(app)
           .post('/users/login')
@@ -226,6 +226,83 @@ describe('Routes: Users', () => {
 
         expect(response.body.message)
           .toEqual(`User not found for Id ${user.id}`)
+      })
+    })
+  })
+
+  describe('when calling PATCH /users/:id', () => {
+    describe('and passing a valid token with valid id', () => {
+      it('updates the user returning updated user ID', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+
+        const response = await request(app)
+          .patch(`/users/${user.id}`)
+          .send({ username: 'john', email: 'john@gmail.com' })
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        expect(response.body.id).toEqual(user.id)
+      })
+    })
+
+    describe('and passing an invalid token', () => {
+      it('returns 401 unauthorized', async () => {
+        const user = await mockUser()
+
+        const response = await request(app)
+          .patch(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', 'Bearer invalid-token')
+          .expect('Content-Type', /json/)
+          .expect(401)
+
+        expect(response.body.message).toEqual('Invalid auth token provided')
+      })
+    })
+
+    describe('and passing a valid token with invalid id', () => {
+      it('returns 403 forbidden', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+        const invalidUserId = 'invalid-user-id'
+
+        const response = await request(app)
+          .patch(`/users/${invalidUserId}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(403)
+
+        expect(response.body.message)
+          .toEqual(`You have no permission to update the user ${invalidUserId}`)
+      })
+    })
+
+    describe('and passing an invalid email', () => {
+      it('returns status 400 with validation error', async () => {
+        const invalidEmail = 'abc123'
+        const user = await mockUser()
+        const auth = new Authentication(user)
+        const response = await request(app)
+          .patch(`/users/${user.id}`)
+          .send({
+            username: 'test',
+            email: invalidEmail,
+            password: '123456'
+          })
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(400)
+
+        expect(response.body.message).toEqual('Validation error')
+        expect(response.body.details).toEqual([{
+          property: 'email',
+          message: '{"isEmail":"email must be an email"}'
+        }])
       })
     })
   })

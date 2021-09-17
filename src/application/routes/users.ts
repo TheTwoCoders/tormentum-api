@@ -1,11 +1,17 @@
 import { Router } from 'express'
-import { deleteUserController, loginController, registerController } from '@application/controllers/UsersController'
+import {
+  deleteUserController,
+  loginController,
+  registerController,
+  updateUserController
+} from '@application/controllers/UsersController'
 import CreateUserRequest from '@application/resources/CreateUserRequest'
 import { validateRequest } from '@infra/server/validate'
 import LoginRequest from '@application/resources/LoginRequest'
 import verifyAuthentication from '@application/middlewares/verifyAuthentication'
 import DeleteUserRequest from '@application/resources/DeleteUserRequest'
 import ForbiddenException from '@application/exceptions/ForbiddenException'
+import UpdateUserRequest from '@application/resources/UpdateUserRequest'
 
 const router = Router()
 
@@ -27,7 +33,7 @@ router.post('/login', async (req, res, next) => {
   try {
     const requestObj = new LoginRequest(req.body)
     await validateRequest(requestObj)
- 
+
     const response = await loginController(requestObj)
     res.status(200)
     res.json(response)
@@ -45,6 +51,23 @@ router.delete('/:id', verifyAuthentication, async (req, res, next) => {
     }
 
     const response = await deleteUserController(request)
+    res.status(200)
+    res.json(response)
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.patch('/:id', verifyAuthentication, async (req, res, next) => {
+  try {
+    const tokenUserId = req.userId
+    const request = new UpdateUserRequest({ id: req.params.id, ...req.body })
+    await validateRequest(request)
+    if (tokenUserId != request.id) {
+      throw new ForbiddenException(`You have no permission to update the user ${request.id}`)
+    }
+
+    const response = await updateUserController(request)
     res.status(200)
     res.json(response)
   } catch (e) {

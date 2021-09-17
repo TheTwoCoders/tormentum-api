@@ -5,7 +5,8 @@ import register from '@domain/use_cases/register'
 import {
   deleteUserController,
   loginController,
-  registerController
+  registerController,
+  updateUserController
 } from '@application/controllers/UsersController'
 import LoginRequest from '@application/resources/LoginRequest'
 import Authentication from '@domain/entities/Authentication'
@@ -17,14 +18,19 @@ import BadRequestException from '@application/exceptions/BadRequestException'
 import deleteUser from '@domain/use_cases/deleteUser'
 import DeleteUserResponse from '@application/resources/DeleteUserResponse'
 import DeleteUserRequest from '@application/resources/DeleteUserRequest'
+import UpdateUserRequest from '@application/resources/UpdateUserRequest'
+import UpdateUserResponse from '@application/resources/UpdateUserResponse'
+import updateUser from '@domain/use_cases/updateUser'
 
 jest.mock('@domain/use_cases/register')
 jest.mock('@domain/use_cases/login')
 jest.mock('@domain/use_cases/deleteUser')
+jest.mock('@domain/use_cases/updateUser')
 
 const mockedRegister = mocked(register)
 const mockedLogin = mocked(login)
 const mockedDeleteUser = mocked(deleteUser)
+const mockedUpdateUser = mocked(updateUser)
 
 describe('Controllers: Users Controller', () => {
   describe('Register Controller', () => {
@@ -135,8 +141,40 @@ describe('Controllers: Users Controller', () => {
         mockedDeleteUser.mockImplementation(() => {
           throw new UserNotFound('user not found')
         })
-        
+
         await expect(deleteUserController(request))
+          .rejects
+          .toThrow(NotFoundException)
+      })
+    })
+  })
+
+  describe('Update user Controller', () => {
+    describe('when sending a valid request', () => {
+      it('calls update user use case', async () => {
+        const request = new UpdateUserRequest({
+          id: '123',
+          email: 'test@gmail.com'
+        })
+        const expectedResponse = new UpdateUserResponse('123')
+        const user = new User('123', 'john', 'test@gmail.com', 'password')
+        mockedUpdateUser.mockImplementation(async () => user)
+
+        const response = await updateUserController(request)
+
+        expect(response).toEqual(expectedResponse)
+      })
+    })
+
+    describe('when sending an non existent user', () => {
+      it('throws NotFoundException', async () => {
+        const request = new UpdateUserRequest({
+          id: '123',
+          email: 'test2@gmail.com'
+        })
+        mockedUpdateUser.mockImplementation(async () => null)
+
+        await expect(updateUserController(request))
           .rejects
           .toThrow(NotFoundException)
       })
