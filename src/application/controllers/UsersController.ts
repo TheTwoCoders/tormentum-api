@@ -77,7 +77,7 @@ const updateUserController = async (
   request: UpdateUserRequest
 ): Promise<UpdateUserResponse> => {
   const user = await updateUser(request.id, { username: request.username, email: request.email })
-  if (user === null) throw new NotFoundException("User not found, unable to update")
+  if (user === null) throw new NotFoundException('User not found, unable to update')
   return new UpdateUserResponse(user.id)
 }
 

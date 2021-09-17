@@ -47,6 +47,7 @@
     "@typescript-eslint/type-annotation-spacing": ["error", { "before": false, "after": true }],
     "no-multi-spaces": "error",
     "import/no-unresolved": "off",
-    "import/newline-after-import": ["error", { "count": 1 }]
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "max-len": ["error", { "code": 80 }]
   }
 }
