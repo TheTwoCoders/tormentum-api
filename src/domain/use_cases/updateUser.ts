@@ -12,9 +12,7 @@ const updateUser = async (
 ): Promise<User> => {
   const updatedUser = await updateUserById(id, content)
 
-  if (updatedUser == null) {
-    throw new UserNotFound(`User not found for id: ${id}`)
-  }
+  if (updatedUser === null) throw new UserNotFound(`User not found for id: ${id}`)
 
   return updatedUser
 }
