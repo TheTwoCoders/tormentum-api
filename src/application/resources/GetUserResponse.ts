@@ -4,8 +4,8 @@ class GetUserResponse {
   username: string
   email: string
   constructor(user: User) {
-    this.username = user.username.toString()
-    this.email = user.email.toString()
+    this.username = user.username
+    this.email = user.email
   }
 }
 

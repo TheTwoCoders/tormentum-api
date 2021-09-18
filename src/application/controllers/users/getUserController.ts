@@ -9,7 +9,7 @@ const getUserController = async (
 ): Promise<GetUserResponse> => {
   try {
     const user = await findUserById(request.id)
-    if (user === null) throw new UserNotFound('user not found')
+    if (user === null) throw new NotFoundException('User Not found')
 
     return new GetUserResponse(user)
   } catch (e) {
