@@ -323,4 +323,73 @@ describe('Routes: Users', () => {
       })
     })
   })
+
+  describe('when calling GET /users/getUser', () => {
+    describe('and passing a valid Id', () => {
+      it('return user info', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+
+        const response = await request(app)
+          .get(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        expect(response.body.message).not.toBeNull()
+      })
+    })
+
+    describe('and passing an invalid token', () => {
+      it('returns 401 unauthorized', async () => {
+        const user = await mockUser()
+
+        const response = await request(app)
+          .get(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', 'Bearer invalid-token')
+          .expect('Content-Type', /json/)
+          .expect(401)
+
+        expect(response.body.message).toEqual('Invalid auth token provided')
+      })
+    })
+
+    describe('and passing a valid token with invalid id', () => {
+      it('returns 403 forbidden', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+        const invalidUserId = 'invalid-user-id'
+
+        const response = await request(app)
+          .get(`/users/${invalidUserId}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(403)
+
+        expect(response.body.message)
+          .toEqual(`You have no permission to get info from user ${invalidUserId}`)
+      })
+    })
+
+    describe('and passing a non existent user', () => {
+      it('returns 404 not found', async () => {
+        const user = await mockUser()
+        const auth = new Authentication(user)
+        await deleteUserById(user.id)
+
+        const response = await request(app)
+          .get(`/users/${user.id}`)
+          .set('Accept', 'application/json')
+          .set('Authorization', `Bearer ${auth.token}`)
+          .expect('Content-Type', /json/)
+          .expect(404)
+
+        expect(response.body.message)
+          .toEqual(`User not found for id: ${user.id}`)
+      })
+    })
+  })
 })

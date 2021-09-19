@@ -75,11 +75,15 @@ router.patch('/:id', verifyAuthentication, async (req, res, next) => {
   }
 })
 
-router.get('getUser', async (req, res, next) => {
+router.get('/:id', verifyAuthentication, async (req, res, next) => {
   try {
-    const requestObj = new GetUserRequest(req.body)
-    await validateRequest(requestObj)
-    const response = await getUserController(requestObj)
+    const tokenUserId = req.userId
+    const request = new GetUserRequest({ id: req.params.id })
+    await validateRequest(request)
+    if (tokenUserId != request.id) {
+      throw new ForbiddenException(`You have no permission to get info from user ${request.id}`)
+    }
+    const response = await getUserController(request)
     res.status(200)
     res.json(response)
   } catch (e) {

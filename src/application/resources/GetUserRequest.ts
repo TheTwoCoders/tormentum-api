@@ -5,8 +5,8 @@ class GetUserRequest {
   @IsNotEmpty()
   id: string
 
-  constructor(body: Record<string, string>) {
-    this.id = body.id
+  constructor(params: Record<string, string>) {
+    this.id = params.id
   }
 }
 

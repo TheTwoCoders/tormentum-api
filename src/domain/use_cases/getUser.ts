@@ -5,7 +5,7 @@ import { findUserById } from '@domain/repositories/UserRepository'
 const getUser = async (id: string): Promise<User> => {
   const foundUser = await findUserById(id)
 
-  if (foundUser === null) throw new UserNotFound(`User not found for id ${id}`)
+  if (foundUser === null) throw new UserNotFound(`User not found for id: ${id}`)
 
   return foundUser
 }
