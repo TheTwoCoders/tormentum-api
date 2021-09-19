@@ -10,6 +10,8 @@ import registerController from '@application/controllers/users/registerControlle
 import loginController from '@application/controllers/users/loginController'
 import deleteUserController from '@application/controllers/users/deleteUserController'
 import updateUserController from '@application/controllers/users/updateUserController'
+import GetUserRequest from '@application/resources/GetUserRequest'
+import getUserController from '@application/controllers/users/getUserController'
 
 const router = Router()
 
@@ -66,6 +68,18 @@ router.patch('/:id', verifyAuthentication, async (req, res, next) => {
     }
 
     const response = await updateUserController(request)
+    res.status(200)
+    res.json(response)
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.get('getUser', async (req, res, next) => {
+  try {
+    const requestObj = new GetUserRequest(req.body)
+    await validateRequest(requestObj)
+    const response = await getUserController(requestObj)
     res.status(200)
     res.json(response)
   } catch (e) {
