@@ -324,7 +324,7 @@ describe('Routes: Users', () => {
     })
   })
 
-  describe('when calling GET /users/getUser', () => {
+  describe('when calling GET /users/:id', () => {
     describe('and passing a valid Id', () => {
       it('return user info', async () => {
         const user = await mockUser()
