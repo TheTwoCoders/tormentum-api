@@ -10,6 +10,8 @@ import registerController from '@application/controllers/users/registerControlle
 import loginController from '@application/controllers/users/loginController'
 import deleteUserController from '@application/controllers/users/deleteUserController'
 import updateUserController from '@application/controllers/users/updateUserController'
+import GetUserRequest from '@application/resources/GetUserRequest'
+import getUserController from '@application/controllers/users/getUserController'
 
 const router = Router()
 
@@ -66,6 +68,22 @@ router.patch('/:id', verifyAuthentication, async (req, res, next) => {
     }
 
     const response = await updateUserController(request)
+    res.status(200)
+    res.json(response)
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.get('/:id', verifyAuthentication, async (req, res, next) => {
+  try {
+    const tokenUserId = req.userId
+    const request = new GetUserRequest({ id: req.params.id })
+    await validateRequest(request)
+    if (tokenUserId != request.id) {
+      throw new ForbiddenException(`You have no permission to get info from user ${request.id}`)
+    }
+    const response = await getUserController(request)
     res.status(200)
     res.json(response)
   } catch (e) {
