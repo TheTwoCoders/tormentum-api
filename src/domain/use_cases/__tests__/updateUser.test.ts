@@ -29,7 +29,7 @@ describe('Use Case: updateUser', () => {
       const content = { email: 'updatedEmail' }
 
       const updatedUser = await updateUser(user.id, content)
-      await expect(updatedUser?.email).not.toEqual(user.email)
+      expect(updatedUser?.email).not.toEqual(user.email)
     })
   })
 
