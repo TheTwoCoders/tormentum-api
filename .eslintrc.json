@@ -15,6 +15,11 @@
     "plugin:import/typescript"
   ],
   "rules": {
+    "indent": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/indent": ["error", 2, {
+      "ignoredNodes": ["ImportDeclaration"]
+    }],
     "semi": [2, "never"],
     "eol-last": ["error", "always"],
     "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 1 }],
@@ -27,7 +32,6 @@
     "jest/consistent-test-it": ["error", {"fn": "it"}],
     "jest-formatting/padding-around-describe-blocks": 2,
     "jest-formatting/padding-around-test-blocks": 2,
-    "indent": ["error", 2],
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "quotes": ["error", "single"],
