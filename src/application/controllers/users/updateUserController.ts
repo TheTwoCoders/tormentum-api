@@ -4,9 +4,9 @@ import UpdateUserResponse from '@application/resources/UpdateUserResponse'
 import UserNotFound from '@domain/exceptions/UserNotFound'
 import updateUser from '@domain/use_cases/updateUser'
 
-const updateUserController = async (
+async function updateUserController(
   request: UpdateUserRequest
-): Promise<UpdateUserResponse> => {
+): Promise<UpdateUserResponse> {
   try {
     const user = await updateUser(
       request.id,
@@ -23,3 +23,4 @@ const updateUserController = async (
 }
 
 export default updateUserController
+

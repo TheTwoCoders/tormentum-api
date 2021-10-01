@@ -4,9 +4,9 @@ import CreateUserResponse from '@application/resources/CreateUserResponse'
 import UserDuplicated from '@domain/exceptions/UserDuplicated'
 import register from '@domain/use_cases/register'
 
-const registerController = async (
+async function registerController(
   request: CreateUserRequest
-): Promise<CreateUserResponse> => {
+): Promise<CreateUserResponse> {
   try {
     const user = await register(
       request.username,

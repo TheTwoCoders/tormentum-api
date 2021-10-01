@@ -2,9 +2,7 @@ import { validate } from 'class-validator'
 import ValidationException from '@application/exceptions/ValidationException'
 import ValidationErrorResponse from '@application/resources/ValidationErrorResponse'
 
-const validateRequest = async (
-  requestObj: object
-): Promise<void> => {
+async function validateRequest(requestObj: object): Promise<void> {
   const errors = await validate(requestObj)
 
   if (errors.length > 0) {

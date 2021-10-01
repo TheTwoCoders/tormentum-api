@@ -4,9 +4,9 @@ import DeleteUserResponse from '@application/resources/DeleteUserResponse'
 import UserNotFound from '@domain/exceptions/UserNotFound'
 import deleteUser from '@domain/use_cases/deleteUser'
 
-const deleteUserController = async (
+async function deleteUserController(
   request: DeleteUserRequest
-): Promise<DeleteUserResponse> => {
+): Promise<DeleteUserResponse> {
   try {
     const userId = request.id
 

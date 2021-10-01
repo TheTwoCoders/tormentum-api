@@ -22,7 +22,7 @@ app.use((
   handleError(res, error)
 })
 
-const startServer = (): void => {
+function startServer(): void {
   const PORT = process.env.PORT || 8080
 
   app.listen(PORT, () => {

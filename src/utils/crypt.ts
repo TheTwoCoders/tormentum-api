@@ -1,22 +1,23 @@
 import CryptoJS from 'crypto-js'
 
-const encryptPassword = (password: string): string => 
-  CryptoJS.AES
+function encryptPassword(password: string): string {
+  return CryptoJS.AES
     .encrypt(password, passwordSecretKey())
     .toString()
+}
 
-const verifyPassword = (
+function verifyPassword(
   password: string,
   encryptedPassword: string
-): boolean => {
+): boolean {
   const decryptedPassword = CryptoJS.AES
     .decrypt(encryptedPassword, passwordSecretKey())
     .toString(CryptoJS.enc.Utf8)
-  
+
   return decryptedPassword === password
 }
 
-const passwordSecretKey = (): string => {
+function passwordSecretKey(): string {
   const secretKey = process.env.PASSWORD_SECRET_KEY
 
   if (secretKey === undefined) {

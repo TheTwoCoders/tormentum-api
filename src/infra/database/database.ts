@@ -1,8 +1,6 @@
 import mongoose, { Mongoose, ConnectOptions } from 'mongoose'
 
-const connect = async (
-  dbUrl: string | undefined = process.env.MONGODB_URL,
-): Promise<Mongoose> => {
+async function connect(dbUrl: string | undefined = process.env.MONGODB_URL): Promise<Mongoose> {
   if (dbUrl === undefined) {
     throw Error('You need to set MONGODB_URL env variable')
   }
@@ -16,8 +14,9 @@ const connect = async (
   )
 }
 
-const disconnect = async (connection: Mongoose | null): Promise<void> => {
+async function disconnect(connection: Mongoose | null): Promise<void> {
   if (connection === null) return
+
   await connection.disconnect()
 }
 

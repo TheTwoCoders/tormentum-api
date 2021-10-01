@@ -5,10 +5,8 @@ import UserPasswordIncorrect from '@domain/exceptions/UserPasswordIncorrect'
 import { findUserByEmail } from '@domain/repositories/UserRepository'
 import { verifyPassword } from '@utils/crypt'
 
-const login = async (
-  email: string,
-  password: string
-): Promise<Authentication> => {
+async function login(email: string,
+  password: string): Promise<Authentication> {
   const user = await findUser(email)
   const isPasswordCorrect = verifyPassword(password, user.password)
 
@@ -17,7 +15,7 @@ const login = async (
   throw new UserPasswordIncorrect(`Password incorrect for email ${email}`)
 }
 
-const findUser = async (email: string): Promise<User> => {
+async function findUser(email: string): Promise<User> {
   const user = await findUserByEmail(email)
 
   if (user === null) {
@@ -28,3 +26,4 @@ const findUser = async (email: string): Promise<User> => {
 }
 
 export default login
+
