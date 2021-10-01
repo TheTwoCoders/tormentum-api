@@ -12,16 +12,14 @@ class TestDbConnection {
   }
 }
 
-const connectMemoryDb = async (): Promise<TestDbConnection> => {
+async function connectMemoryDb(): Promise<TestDbConnection> {
   const memoryServer = await MongoMemoryServer.create()
   const mongooseConnection = await connect(memoryServer.getUri())
 
   return new TestDbConnection(mongooseConnection, memoryServer)
 }
 
-const disconnectMemoryDb = async (
-  connection: TestDbConnection | null
-): Promise<void> => {
+async function disconnectMemoryDb(connection: TestDbConnection | null): Promise<void> {
   if (connection == null) return
 
   await disconnect(connection.mongooseConnection)

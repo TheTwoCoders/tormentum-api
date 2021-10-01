@@ -1,16 +1,18 @@
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
-const generateJwtToken = (obj: Record<string, unknown>): string =>
-  jwt.sign(obj, tokenSecretKey())
+function generateJwtToken(obj: Record<string, unknown>): string {
+  return jwt.sign(obj, tokenSecretKey())
+}
 
-const verifyToken = (token: string): JwtPayload => {
+function verifyToken(token: string): JwtPayload {
   const payload = jwt.verify(token, tokenSecretKey())
-  if (typeof(payload) === 'string') throw Error('Invalid token payload')
+  if (typeof (payload) === 'string')
+    throw Error('Invalid token payload')
 
   return payload
 }
 
-const tokenSecretKey = (): string => {
+function tokenSecretKey(): string {
   const secretKey = process.env.TOKEN_SECRET_KEY
 
   if (secretKey === undefined) {

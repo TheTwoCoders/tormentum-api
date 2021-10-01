@@ -4,9 +4,9 @@ import GetUserResponse from '@application/resources/GetUserResponse'
 import UserNotFound from '@domain/exceptions/UserNotFound'
 import getUser from '@domain/use_cases/getUser'
 
-const getUserController = async (
+async function getUserController(
   request: GetUserRequest
-): Promise<GetUserResponse> => {
+): Promise<GetUserResponse> {
   try {
     const user = await getUser(request.id)
 

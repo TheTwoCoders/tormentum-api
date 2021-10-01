@@ -2,11 +2,9 @@ import User from '@domain/entities/User'
 import UserModel, { userModelToDomain } from '@infra/database/models/UserModel'
 import { encryptPassword } from '@utils/crypt'
 
-const createUser = async (
-  username: string,
+async function createUser(username: string,
   email: string,
-  password: string
-): Promise<User> => {
+  password: string): Promise<User> {
   const user = new UserModel({
     username,
     email,
@@ -17,11 +15,11 @@ const createUser = async (
   return userModelToDomain(savedUser)
 }
 
-const deleteAllUsers = async (): Promise<void> => {
+async function deleteAllUsers(): Promise<void> {
   await UserModel.deleteMany({})
 }
 
-const findUserByEmail = async (email: string): Promise<User | null> => {
+async function findUserByEmail(email: string): Promise<User | null> {
   const user = await UserModel.findOne({ email })
 
   if (user === null) return null
@@ -29,7 +27,7 @@ const findUserByEmail = async (email: string): Promise<User | null> => {
   return userModelToDomain(user)
 }
 
-const findUserById = async (id: string): Promise<User | null> => {
+async function findUserById(id: string): Promise<User | null> {
   const user = await UserModel.findById(id)
 
   if (user === null) return null
@@ -37,18 +35,18 @@ const findUserById = async (id: string): Promise<User | null> => {
   return userModelToDomain(user)
 }
 
-const deleteUserById = async (id: string): Promise<void> => {
+async function deleteUserById(id: string): Promise<void> {
   await UserModel.findByIdAndDelete(id)
 }
 
-const updateUserById = async (
+async function updateUserById(
   id: string,
   content: {
-    username?: string,
-    email?: string,
+    username?: string
+    email?: string
     password?: string
   }
-): Promise<User | null> => {
+): Promise<User | null> {
   const updatedUser = await UserModel.findByIdAndUpdate(id, content)
 
   if (updatedUser == null) return null
@@ -57,3 +55,4 @@ const updateUserById = async (
 }
 
 export { createUser, deleteAllUsers, findUserByEmail, findUserById, deleteUserById, updateUserById }
+

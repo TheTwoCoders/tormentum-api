@@ -1,10 +1,10 @@
 import User from '@domain/entities/User'
 import { createUser } from '@domain/repositories/UserRepository'
 
-const mockUser = async (
+async function mockUser(
   email = 'standardTestEmail@email.com',
   password = 'standardPassword'
-): Promise<User> => {
+): Promise<User> {
   return createUser('John', email, password)
 }
 

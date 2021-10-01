@@ -40,13 +40,15 @@ describe('Middlewares: Authentication', () => {
     })
   })
 
-  const setup = (token: string | undefined) => ({
-    req: mockReq(token),
-    res: {} as Response,
-    next: jest.fn()
-  })
+  function setup(token: string | undefined) {
+    return ({
+      req: mockReq(token),
+      res: {} as Response,
+      next: jest.fn()
+    })
+  }
 
-  const mockReq = (token: string | undefined): Request => {
+  function mockReq(token: string | undefined): Request {
     return {
       header: jest.fn((key) => ({
         Authorization: token ? `Bearer ${token}` : undefined

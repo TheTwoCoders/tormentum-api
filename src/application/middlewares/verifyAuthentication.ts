@@ -2,11 +2,11 @@ import UnauthorizedException from '@application/exceptions/UnauthorizedException
 import { verifyToken } from '@utils/token'
 import { NextFunction, Response, Request } from 'express'
 
-const verifyAuthentication = (
+function verifyAuthentication(
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
-): void => {
+): void {
   const token = req.header('Authorization')?.replace('Bearer ', '')
 
   if (!token) {
@@ -23,3 +23,4 @@ const verifyAuthentication = (
 }
 
 export default verifyAuthentication
+

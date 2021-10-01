@@ -8,30 +8,30 @@ import NotFoundException from '@application/exceptions/NotFoundException'
 import UnauthorizedException from '@application/exceptions/UnauthorizedException'
 import ForbiddenException from '@application/exceptions/ForbiddenException'
 
-const respondError = (
+function respondError(
   res: express.Response,
   status: number,
   error: ErrorResponse
-): void => {
+): void {
   res.status(status),
   res.json(error)
 }
 
-const respondValidationError = (
+function respondValidationError(
   res: express.Response,
   error: ValidationErrorResponse
-): void => {
+): void {
   respondError(res, 400, error)
 }
 
-const respondUnknownError = (
+function respondUnknownError(
   res: express.Response,
   message: string
-): void => {
+): void {
   respondError(res, 500, new ErrorResponse(message))
 }
 
-const handleError = (res: express.Response, e: Error): void => {
+function handleError(res: express.Response, e: Error): void {
   if (e instanceof ValidationException) {
     return respondValidationError(res, e.response)
   } else if (e instanceof ConflictException) {

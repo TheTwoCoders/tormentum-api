@@ -6,9 +6,9 @@ import UserNotFound from '@domain/exceptions/UserNotFound'
 import UserPasswordIncorrect from '@domain/exceptions/UserPasswordIncorrect'
 import login from '@domain/use_cases/login'
 
-const loginController = async (
+async function loginController(
   request: LoginRequest
-): Promise<LoginResponse> => {
+): Promise<LoginResponse> {
   try {
     const authentication = await login(
       request.email,
