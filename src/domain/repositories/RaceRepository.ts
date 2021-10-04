@@ -15,6 +15,14 @@ class RaceRepository {
 
     return raceModelToDomain(savedRace)
   }
+
+  static async findById(id: string): Promise<Race | null> {
+    const race = await RaceModel.findById(id)
+
+    if (race === null) return null
+
+    return raceModelToDomain(race)
+  }
 }
 
 export default RaceRepository

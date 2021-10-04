@@ -35,5 +35,25 @@ describe('Repositories: Race Repository', () => {
         .toBeInstanceOf(StrengthAttribute)
     })
   })
+
+  describe('when searching a race by id', () => {
+    it('returns the race', async () => {
+      const params = {
+        name: 'Test Search Race',
+        description: 'A simple human',
+        raceModifiers: [{
+          value: 10,
+          attributeId: 'STRENGTH'
+        }]
+      }
+      const savedRace = await RaceRepository.save(params)
+
+      const foundRace = await RaceRepository.findById(savedRace.id)
+
+      expect(foundRace).not.toBeNull()
+      expect(foundRace?.id).toEqual(savedRace.id)
+      expect(foundRace?.name).toEqual(params.name)
+    })
+  })
 })
 
